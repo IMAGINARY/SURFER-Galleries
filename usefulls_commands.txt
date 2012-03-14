@@ -1,0 +1,5 @@
+% convert a tex file into a png image
+pdflatex jDM08_expl.tex ; pdftoppm -f 1 -l 1 -aa yes jDM08_expl.pdf /tmp/jDM08_expl ; convert -geometry 300x600 /tmp/jDM08_expl-000001.ppm jDM08_expl.png
+
+% compile all tex files within one directory
+find . -name "*.tex" | xargs -I {} pdflatex {}
