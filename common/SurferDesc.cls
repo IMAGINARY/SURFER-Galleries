@@ -3,9 +3,11 @@
 \newif\if@languageDE
 \newif\if@languageEN
 \newif\if@languageRU
+\newif\if@languageSR
 \DeclareOption{de}{\@languageDEtrue}
 \DeclareOption{en}{\@languageENtrue}
 \DeclareOption{ru}{\@languageRUtrue}
+\DeclareOption{sr}{\@languageSRtrue}
 \DeclareOption*{%
 \PackageWarning{SurferDesc}{Unknown option `\CurrentOption'}%
 }
@@ -24,6 +26,12 @@
 \if@languageRU % load packages for russian language support
 \RequirePackage[utf8x]{inputenc}
 \RequirePackage[russian]{babel}
+\RequirePackage[T2A,T1]{autofe}
+\newcommand{\surferbffont}{\bf}
+\else
+\if@languageSR % load packages for serbian language support
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[serbian]{babel}
 \RequirePackage[T2A,T1]{autofe}
 \newcommand{\surferbffont}{\bf}
 \else
