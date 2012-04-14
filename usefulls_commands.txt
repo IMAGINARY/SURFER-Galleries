@@ -4,18 +4,8 @@ pdflatex jDM08_expl.tex ; pdftoppm -f 1 -l 1 -aa yes jDM08_expl.pdf /tmp/jDM08_e
 % compile all tex files within one directory
 find . -name "*.tex" | xargs -I {} pdflatex {}
 
-% convert UTF16 files to UTF8
-find . -name "*.tex" | xargs -I {} $(iconv -f UTF-16 -t UTF-8 {} > {}$
-
-%TODO: fix the commands below
-% remove byte order mark from UTF8 unicode files (UTF8-BOM -> UTF8), since latex does not understand BOM; _LANG must be e.g. _de, _sr, _ru, ... or left blank
-% does not work in all cases .. needs to be fixed
-find . -name "*_LANG.tex" | xargs -I {} $(awk '{if(NR==1)sub(/^\xef\xbb\xbf/,"");print}' {} > {})
-find . -name "*_LANG.tex" | xargs -I {} $(awk '{if(NR==1)sub(/^\xfe\xff/,"");print}' {} > {})
+% remove byte order mark from unicode files (UTF8-BOM -> UTF8), since latex does not understand BOM; LANG must be e.g. de, sr, ru, ...
+find . -name "*_LANG.tex" | xargs -I {} sh -c 'uconv --remove-signature -o "{}2" {} && mv -f "{}2" {}'
 
 % change the language option in _LANG2 files from LANG1 to LANG2
-find -name "*_LANG2.tex" | xargs sed -i 's/\\documentclass\[LANG1\]{\.\/\.\.\/\.\.\/common\/SurferDesc}\(.*\)/\\documentclass\[LANG2\]{\.\/\.\.\/\.\.\/common\/SurferDesc}\1/g'
-
-
-
-find . -name "*.tex" | xargs -I {} $(uconv --remove-signature {} > {})
+find -name "*_LANG2.tex" | xargs sed -r -i 's/\\documentclass\[LANG1\]\{\.\/\.\.\/\.\.\/common\/SurferDesc\}(.*)/\\documentclass[LANG2]{\.\/\.\.\/\.\.\/common\/SurferDesc}\1/g'

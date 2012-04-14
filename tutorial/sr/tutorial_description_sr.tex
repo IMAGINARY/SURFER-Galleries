@@ -2,10 +2,10 @@
 % jDM08_expl_engl_galIntros.tex
 %
 % 
-% Einleitungen f¸r die Gallerien in surfer.
+% Einleitungen für die Gallerien in surfer.
 %
 % Um aus dem pdf automatisiert ein png-Bild zu erhalten, 
-% kˆnnen folgende Kommandos verwendet
+% können folgende Kommandos verwendet
 % werden: 
 %
 % pdflatex jDM08_expl_engl.tex ; pdftoppm -f 1 -l 1 -aa yes jDM08_expl_engl.pdf /tmp/jDM08_expl_engl ; convert -geometry 300x600 /tmp/jDM08_expl_engl-000001.ppm jDM08_expl_engl.png
@@ -22,7 +22,7 @@
 \documentclass[sans]{amsart}
 
 %
-% Die folgenden Zeilen setzen Hˆhe und Breite der Gallerie-Einleitungen fest:
+% Die folgenden Zeilen setzen Höhe und Breite der Gallerie-Einleitungen fest:
 %
 \newlength{\galIntroHeight}
 \newlength{\galIntroWidth}
@@ -30,7 +30,7 @@
 \setlength{\galIntroWidth}{10.34cm}
 
 %
-% Die folgenden Zeilen setzen Hˆhe und Breite des Erkl‰rungs-Textes fest:
+% Die folgenden Zeilen setzen Höhe und Breite des Erklärungs-Textes fest:
 %
 \newlength{\explHeight}
 \newlength{\explWidth}
@@ -38,7 +38,7 @@
 \setlength{\explWidth}{6cm}
 
 %
-% Die folgenden Zeilen setzen einen (leeren, d.h.\ weiﬂen) 
+% Die folgenden Zeilen setzen einen (leeren, d.h.\ weißen) 
 % Rahmen von 0.1 cm um den Text:
 %
 \usepackage[
@@ -61,8 +61,9 @@ paperheight=\galIntroHeight
 % some latex packages we might need:
 %
 \usepackage{showidx}
-\usepackage[latin1]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[T2A]{autofe}
 \usepackage{latexsym}
 \usepackage{amsbsy,amscd,amsmath,amstext,amsthm}
 \usepackage{amsfonts}
@@ -74,9 +75,7 @@ paperheight=\galIntroHeight
 \usepackage{eso-pic}
 \usepackage{graphicx}
 \usepackage[active]{srcltx}
-\usepackage{hyperref}
-\usepackage[german]{babel}
-\usepackage{german}
+%\usepackage{hyperref}
 \usepackage{ifthen}
 \usepackage{setspace}
 \onehalfspacing
