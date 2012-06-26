@@ -1,82 +1,49 @@
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{SurferDesc}[2012/06/26 Class for Surfer description files]
-\newif\if@languageDE
-\newif\if@languageEN
-\newif\if@languageRU
-\newif\if@languageSR
-\newif\if@languageES
-\DeclareOption{de}{\@languageDEtrue}
-\DeclareOption{en}{\@languageENtrue}
-\DeclareOption{ru}{\@languageRUtrue}
-\DeclareOption{sr}{\@languageSRtrue}
-\DeclareOption{es}{\@languageEStrue}
-\DeclareOption*{%
-\PackageWarning{SurferDesc}{Unknown option `\CurrentOption'}%
-}
-\ProcessOptions\relax
-\LoadClass{amsart}
+%
+% jDM08_expl_engl_galIntros.tex
+%
+% 
+% Einleitungen für die Gallerien in surfer.
+%
+% Um aus dem pdf automatisiert ein png-Bild zu erhalten, 
+% können folgende Kommandos verwendet
+% werden: 
+%
+% pdflatex jDM08_expl_engl.tex ; pdftoppm -f 1 -l 1 -aa yes jDM08_expl_engl.pdf /tmp/jDM08_expl_engl ; convert -geometry 300x600 /tmp/jDM08_expl_engl-000001.ppm jDM08_expl_engl.png
+%
+%
+% English version: March 2009
+%
+% Oliver Labs
+% www.OliverLabs.net
+% www.AlgebraicSurface.net
+%         
+%
 
-\newcommand{\changefont}[3]{
-\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
-\if@languageDE % load packages for german language support
-\RequirePackage[latin1]{inputenc}
-\RequirePackage[T1]{fontenc}
-\RequirePackage[ngerman]{babel}
-\RequirePackage{ngerman}
-\newcommand{\surferbffont}{\changefont{phv}{b}{n}}
-\else
-\if@languageRU % load packages for russian language support
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[russian]{babel}
-\RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf}
-\else
-\if@languageSR % load packages for serbian language support
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[serbian]{babel}
-\RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf}
-\else
-\if@languageES % load packages for spanish language support
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[spanish]{babel}
-\RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf}
-\else
-
-%\if@languageEN % load packages for english language support (default)
-\RequirePackage[latin1]{inputenc}
-\RequirePackage[T1]{fontenc}
-\RequirePackage[english]{babel}
-\newcommand{\surferbffont}{\changefont{phv}{b}{n}}
-%\fi
-\fi
-\fi
-
+\documentclass[sans]{amsart}
 
 %
-% Die folgenden Zeilen setzen HÃ¶he und Breite der Gallerie-Einleitungen fest:
+% Die folgenden Zeilen setzen Höhe und Breite der Gallerie-Einleitungen fest:
 %
 \newlength{\galIntroHeight}
 \newlength{\galIntroWidth}
-\setlength{\galIntroHeight}{11.61cm}
-\setlength{\galIntroWidth}{10cm}
+\setlength{\galIntroHeight}{12cm}
+\setlength{\galIntroWidth}{10.34cm}
 
 %
-% Die folgenden Zeilen setzen HÃ¶he und Breite des ErklÃ¤rungs-Textes fest:
+% Die folgenden Zeilen setzen Höhe und Breite des Erklärungs-Textes fest:
 %
 \newlength{\explHeight}
 \newlength{\explWidth}
-\setlength{\explHeight}{11.5cm}
-\setlength{\explWidth}{7.46cm}
+\setlength{\explHeight}{12cm}
+\setlength{\explWidth}{6cm}
 
 %
-% Die folgenden Zeilen setzen einen (leeren, d.h.\ weiÃŸen) 
+% Die folgenden Zeilen setzen einen (leeren, d.h.\ weißen) 
 % Rahmen von 0.1 cm um den Text:
 %
-\RequirePackage[
-paperheight=\explHeight
-,paperwidth=\explWidth
+\usepackage[
+paperheight=\galIntroHeight
+,paperwidth=\galIntroWidth
 %,height=9.8cm
 %,width=5.8cm
 ,left=0.1cm
@@ -88,35 +55,36 @@ paperheight=\explHeight
 %%%%%
 % it seems to me that the papersize has to be specified here and further down, too.
 %
-\special{papersize=\explHeight,\explWidth}
+\special{papersize=\galIntroHeight,\galIntroWidth}
 
 %
 % some latex packages we might need:
 %
-\RequirePackage{showidx}
-\RequirePackage{latexsym}
-\RequirePackage{amsbsy,amscd,amsmath,amstext,amsthm}
-\RequirePackage{amsfonts}
-\RequirePackage{amssymb}
-\RequirePackage{color}
-\RequirePackage{dsfont}
-\RequirePackage{varioref}
-\RequirePackage{epsfig}
-\RequirePackage{eso-pic}
-\RequirePackage{graphicx}
-\RequirePackage[active]{srcltx}
-%\RequirePackage{hyperref}
-\RequirePackage{ifthen}
-%\RequirePackage{pdftex}
-\pdfimageresolution=72
-\pdfminorversion=4
-
-\RequirePackage[scaled=0.92]{helvet}
-\RequirePackage{multicol}
-\RequirePackage{pstricks,pst-grad}
-\RequirePackage{rotating}
-\RequirePackage{setspace}
+\usepackage{showidx}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{latexsym}
+\usepackage{amsbsy,amscd,amsmath,amstext,amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{varioref}
+\usepackage{epsfig}
+\usepackage{eso-pic}
+\usepackage{graphicx}
+\usepackage[active]{srcltx}
+\usepackage{hyperref}
+\usepackage[german]{babel}
+\usepackage{german}
+\usepackage{ifthen}
+\usepackage{setspace}
 \onehalfspacing
+
+%\usepackage[scaled=0.92]{helvet}
+\usepackage{multicol}
+\usepackage{pstricks,pst-grad}
+\usepackage{rotating}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -140,7 +108,7 @@ paperheight=\explHeight
 \def\sldefault{sl}
 \def\bfdefault{bx}
 
-\RequirePackage{sfmath} % use sans serif fonts in math mode
+\usepackage{sfmath} % use sans serif fonts in math mode
 
 
 %
@@ -167,10 +135,8 @@ paperheight=\explHeight
 \definecolor{picsFgColor}{rgb}{0.9,0.9,0.7}
 \definecolor{picsFgColorSnd}{rgb}{0.95,0.95,0.75}
 
-% white bg:
 \definecolor{textHgColor}{rgb}{1.0,1.0,1.0}
-% light ocker bg:
-%\definecolor{textHgColor}{rgb}{0.69,0.62,0.41}
+%\definecolor{textHgColor}{rgb}{0.9,0.9,0.9}
 \definecolor{textFgColor}{rgb}{0.15,0.15,0.1}
 \definecolor{textFgColorSnd}{rgb}{0.4,0.4,0.2}
 \definecolor{textFgColorDark}{rgb}{0.1,0.1,0.07}
@@ -217,8 +183,6 @@ paperheight=\explHeight
 
 \newcommand{\smcdot}{{\textup{$\cdot$}}}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Begin: surfer stuff
@@ -229,6 +193,7 @@ paperheight=\explHeight
 \newenvironment{surferGalIntroPage}{%
   % start a new page, if necessary
   \newpage
+ % \twocolumn
   % it seems to me that the papersize has to be specified here and further up, too
   \special{papersize=\galIntroHeight,\galIntroWidth}
   % the page background color:
@@ -242,7 +207,8 @@ paperheight=\explHeight
   {\end{flushleft}}
 
 
-\newenvironment{surferPage}{%%%%%  % start a new page, if necessary
+\newenvironment{surferPage}{%%%%% 
+  % start a new page, if necessary
   \newpage
   % it seems to me that the papersize has to be specified here and further up, too
   \special{papersize=\explHeight,\explWidth}
@@ -256,13 +222,15 @@ paperheight=\explHeight
   \begin{flushleft}}%
 {\end{flushleft}}
 
-\newenvironment{surferTitle}{\surferbffont}{
+\newenvironment{surferTitle}{\bf}{
+
 }
-\newenvironment{galTitle}{\surferbffont}{
+
+\newenvironment{galTitle}{\bf}{
+
 }
+
 \newenvironment{surferText}{}{}
-%\changefont{phv}{m}{n}
-\footnotesize
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -273,3 +241,38 @@ paperheight=\explHeight
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+% The document starts here:
+%
+\begin{document}
+\footnotesize
+% 
+% Einfache Singularitäten 
+%
+\begin{surferGalIntroPage}
+  \begin{galTitle}The Fantasy Surfaces\end{galTitle}
+  % 
+  \begin{surferText}
+ 
+We often hear about how complicated mathematics are, but it is a fact that it helps us to understand the complexity of our world. For example through recognition of fundamental structures and important common properties of real objects. Gathering all objects with the same important properties in one \textit{class}, while ignoring the less important properties, is called classification. It is one of the most important means to get an overview of the sheer infinite diversity of the objects and forms of our world. For that, mathematics is fundamental. To decide about what is important or not depends on what you want to understand. This can be for example the size or form of an object.
+\\
+
+\vspace{0.4cm}
+
+To describe and to classify forms is an old human need, how to do it is not obvious. The old Greek used mainly geometry and proportions of geometrical objects. Later algebra was essentially developed by the Arabs (Al Khwarizmi, 900 B.C.). In the 18th century it was a big achievement by the mathematicians Fermat and Descartes to introduce the coordinate system to describe geometrical relations. This made it possible to use algebra and geometry together.
+\\
+\vspace{0.4cm}
+The SURFER programme is a prime example for this relation since it creates geometry (the image) out of algebra (the formula).
+In this gallery you can experience the beauty of mathematics and become creative yourself. Choose one of the surfaces on the right side. The mathematical connection between formula and form is explained through a series of examples in a simple way.\\
+The imagination and intuition comes from your side...
+      \end{surferText}
+\end{surferGalIntroPage}
+% Einfache singuläre Flächen
+%
+%
+% Weltrekorde:
+%
+\end{document}
+%
+% end of the document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

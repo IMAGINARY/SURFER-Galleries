@@ -7,5 +7,10 @@ find . -name "*.tex" | xargs -I {} pdflatex {}
 % remove byte order mark from unicode files (UTF8-BOM -> UTF8), since latex does not understand BOM; LANG must be e.g. de, sr, ru, ...
 find . -name "*_LANG.tex" | xargs -I {} sh -c 'uconv --remove-signature -o "{}2" {} && mv -f "{}2" {}'
 
+% add new language based on old one (here: en -> es)
+% must be executed in each of the gallery folders (i.e. fantasy, record, tutorial)
+mkdir -p "es" && svn add es && find en -name "*.tex" | sed "s/^en\/\(.*\)_en.tex/svn cp \0 es\/\1_es.tex/g" | xargs -I {} bash -c {}
+find en -name "*.pdf" | sed "s/^en\/\(.*\)_en.pdf/svn cp \0 es\/\1_es.pdf/g" | xargs -I {} bash -c {}
+
 % change the language option in _LANG2 files from LANG1 to LANG2
 find -name "*_LANG2.tex" | xargs sed -r -i 's/\\documentclass\[LANG1\]\{\.\/\.\.\/\.\.\/common\/SurferDesc\}(.*)/\\documentclass[LANG2]{\.\/\.\.\/\.\.\/common\/SurferDesc}\1/g'
