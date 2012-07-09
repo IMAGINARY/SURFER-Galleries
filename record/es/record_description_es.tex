@@ -2,10 +2,10 @@
 % jDM08_expl_engl_galIntros.tex
 %
 % 
-% Einleitungen f�r die Gallerien in surfer.
+% Einleitungen für die Gallerien in surfer.
 %
 % Um aus dem pdf automatisiert ein png-Bild zu erhalten, 
-% k�nnen folgende Kommandos verwendet
+% können folgende Kommandos verwendet
 % werden: 
 %
 % pdflatex jDM08_expl_engl.tex ; pdftoppm -f 1 -l 1 -aa yes jDM08_expl_engl.pdf /tmp/jDM08_expl_engl ; convert -geometry 300x600 /tmp/jDM08_expl_engl-000001.ppm jDM08_expl_engl.png
@@ -22,7 +22,7 @@
 \documentclass[sans]{amsart}
 
 %
-% Die folgenden Zeilen setzen H�he und Breite der Gallerie-Einleitungen fest:
+% Die folgenden Zeilen setzen Höhe und Breite der Gallerie-Einleitungen fest:
 %
 \newlength{\galIntroHeight}
 \newlength{\galIntroWidth}
@@ -30,7 +30,7 @@
 \setlength{\galIntroWidth}{10.34cm}
 
 %
-% Die folgenden Zeilen setzen H�he und Breite des Erkl�rungs-Textes fest:
+% Die folgenden Zeilen setzen Höhe und Breite des Erklärungs-Textes fest:
 %
 \newlength{\explHeight}
 \newlength{\explWidth}
@@ -38,7 +38,7 @@
 \setlength{\explWidth}{6cm}
 
 %
-% Die folgenden Zeilen setzen einen (leeren, d.h.\ wei�en) 
+% Die folgenden Zeilen setzen einen (leeren, d.h.\ weißen) 
 % Rahmen von 0.1 cm um den Text:
 %
 \usepackage[
@@ -61,8 +61,6 @@ paperheight=\galIntroHeight
 % some latex packages we might need:
 %
 \usepackage{showidx}
-\usepackage[latin1]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage{latexsym}
 \usepackage{amsbsy,amscd,amsmath,amstext,amsthm}
 \usepackage{amsfonts}
@@ -75,8 +73,9 @@ paperheight=\galIntroHeight
 \usepackage{graphicx}
 \usepackage[active]{srcltx}
 \usepackage{hyperref}
-\usepackage[german]{babel}
-\usepackage{german}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T2A,T1]{autofe}
 \usepackage{ifthen}
 \usepackage{setspace}
 \onehalfspacing
@@ -246,59 +245,60 @@ paperheight=\galIntroHeight
 \begin{document}
 \footnotesize
 % 
-% Einfache Singularit�ten 
+% Einfache Singularitäten 
 %
 \begin{surferGalIntroPage}
 
-\begin{surferTitle}World Record Surfaces\end{surferTitle}
+\begin{surferTitle}Superficies Récord\end{surferTitle}
   % 
   \begin{surferText}
-    A surface is called \emph{non-singular} or \emph{smooth} if it does not have any apex (such points are called \emph{singularities}). Examples of smooth surfaces are a sphere or a torus, see the first 2
-    pictures below.  
-    This is almost sure the case when choosing a random surface. 
+    Una superficie es llamada \emph{no singular} o \emph{lisa} si, como la esfera o el toro,
+    no tiene \emph{singularidades}, es decir no tienen puntas o aristas. Casi cualquier superficie que elijamos al azar será no singular.
  \begin{center}
       \vspace{-0.2cm}
       \begin{tabular}{@{}c@{}c@{}c@{\quad}c@{}c@{}c@{}c@{}}
         \begin{tabular}{@{}c@{}}
-          smooth:
+          Lisa:
         \end{tabular}
         &
         \begin{tabular}{@{}c@{}}
-          \includegraphics[width=1.1cm]{./../../common/images/kugel}
+          \includegraphics[width=1.1cm]{kugel}
         \end{tabular}
         &
         \begin{tabular}{@{}c@{}}
-          \includegraphics[width=1.1cm]{./../../common/images/torus}
+          \includegraphics[width=1.1cm]{torus}
         \end{tabular}
         &
         \begin{tabular}{@{}c@{}}
-          many\\
-          singularities:
+          Muchas\\
+          singularidades:
         \end{tabular}
         &
         \begin{tabular}{c@{}@{}}
-          \includegraphics[width=1.1cm]{./../../common/images/kummer}
+          \includegraphics[width=1.1cm]{kummer}
         \end{tabular}
         &
         \begin{tabular}{c@{}@{}}
-          \includegraphics[width=1.1cm]{./../../common/images/togliatti}
+          \includegraphics[width=1.1cm]{togliatti}
         \end{tabular}
         &
         \begin{tabular}{c@{}@{}}
-          \includegraphics[width=1.1cm]{./../../common/images/barth_sextic}
+          \includegraphics[width=1.1cm]{barth_sextic}
         \end{tabular}
       \end{tabular}
     \end{center}
     \vspace{-0.2cm}
-    Thus it is very special when a surface exhibits singularities. They are the most interesting points of a surface. The surfaces in the SURFER programme are defined by polynomials. The highest power of a polynomial is called its degree $d$. Mathematicians ask how many singularities  a surface of a certain degree may have.
-    We will denote this number by $\mu(d)$.
+    Por lo tanto, una superficie que tenga singularidades es muy especial.
+    Ahora bien, es natural pensar cuántas singularidades puede llegar a tener una
+    superficie algebraica, según el grado $d$ del polinomio que la define.  
+    La determinación de este número, que denotamos $\mu(d)$, es muy difícil de calcular.
 
- It turns out that this number $\mu(d)$ is very difficult to compute.
-    Since the $19$th century, $\mu(d)$ is known for $d=1,2,3,4$, but for $d=5$
-    this number was only identified in 1980, and for $d=6$ in 1996.
-    For $d\ge 7$, $\mu(d)$ is still unknown.
+    En el siglo XIX, se conocieron los valores de $\mu(d)$ para los casos $d=1,2,3,4$. Pero para $d=5$ 
+    y $d=6$ no fueron descubiertos sino hasta los años 1980 y 1996, respectivamente.
+    Desde entonces, se han obtenido algunos resultados parciales para $d\ge 7$, pero la
+    respuesta definitiva para el caso general es aún incierta.
   
-    So, every new world record for a $\mu(d)$ is an important partial result. It seems to take a lot more time to completely solve this problem for arbitrary $d$.\\  A few known results:
+    Algunos resultados conocidos:
     
    \begin{center}
       \begin{tabular}{r|cccccccc|c}
@@ -315,7 +315,7 @@ paperheight=\galIntroHeight
     \end{center}
 \end{surferText}
   \end{surferGalIntroPage}
-% Einfache singul�re Fl�chen
+% Einfache singuläre Flächen
 %
 %
 % Weltrekorde:

@@ -1,43 +1,53 @@
-\documentclass[es]{./../../common/SurferDesc}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[es]{SurferDesc}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % The document starts here:
 %
 \begin{document}
 \footnotesize
-% Weltrekordfl�chen
-
-%%% 1.Tafel
-
+% Einfache Singularitten 
+%
 \begin{surferPage}
-  \begin{surferTitle}A Septic with 99 Singularities\end{surferTitle}   \\
-  
-    Oliver Labs constructed a surface of degree $7$ (septic) while working on his
-    dissertation at Mainz University in 2004. This is the current world record
-    of degree $7$; but it may still exist a septic with up to $104$
-    singularities!  
-    Labs's surface has the symmetry of a regular $7$--gon (left picture).
-    This is visible when looking at the surface from the top (right picture):
-
+  \begin{surferTitle}Una Séptica con $99$ Singularidades\end{surferTitle} \\
+  % 
+  \begin{surferText}
+    El número de puntos singulares de una superficie de grado $7$ (séptica)
+    no puede ser mayor a 104 (Varchenco).
+    La que descubrió Oliver Labs en 2004 tiene $99$, por lo tanto, es posible 
+    que existan sépticas con más singularidades. Sin embargo, por el momento
+    no se encontró ninguna que supere este récord.
+    
+    La séptica de Labs tiene la simetría de un heptágono:  
+    
     \vspace*{-0.3em}
     \begin{center}
       \begin{tabular}{c@{\qquad}c}
-        \includegraphics[height=1.5cm]{./../../common/images/labsseptic1.pdf}
+        \includegraphics[height=1.5cm]{seven_gon}
         &
-        \includegraphics[height=1.5cm]{./../../common/images/labs_septic_von_oben}
+        \includegraphics[height=1.5cm]{labs_septic_von_oben}
       \end{tabular}
     \end{center}
     \vspace*{-0.3em}
-
-    For constructing this surface, Oliver Labs used the computer algebra system
-    {\sc Singular} (Kaiserslautern University.) which is well suited for
-    computations in algebraic geometry and singularities.
-
-    He used the fact that one can compute with finite sets of numbers in a
-    natural way. We know this from the clock; 24.00$=$0.00, 24.00 $+$ 1 hour is
-    not 25.00, but 1.00.
-
-     
+    Para construir esta superficie, Labs usó el sistema 
+    {\sc Singular} (Universidad de Kaiserslautern), un programa especialmente adaptado
+    para cálculos de geometría algebraica y singularidades. 
+    Además, usó aritmética modular, algo que utilizamos habitualmente cuando hacemos cuentas con las horas:\\
+    24:00$=$0:00 y 24:00 $+$ 1:00 hora no es 25:00, sino 1:00.\\
+    La aritmética modular funciona de la misma manera, pero usando un número cualquiera
+    (el módulo) en lugar de 24.
+    En geometría algebraica suele convenir escoger números primos como módulos.
+ 
+%    Eine verwandte Technik kann man auch in der Kryptologie benutzen,
+%    um Zahlen in Primfaktoren zu zerlegen.
+  \end{surferText}
 \end{surferPage}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "jDM08_expl_engl"
+%%% End: 
+
+
+
 
 
 \end{document}

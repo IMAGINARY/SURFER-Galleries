@@ -2,10 +2,10 @@
 % jDM08_expl_engl_galIntros.tex
 %
 % 
-% Einleitungen f�r die Gallerien in surfer.
+% Einleitungen fr die Gallerien in surfer.
 %
 % Um aus dem pdf automatisiert ein png-Bild zu erhalten, 
-% k�nnen folgende Kommandos verwendet
+% knnen folgende Kommandos verwendet
 % werden: 
 %
 % pdflatex jDM08_expl_engl.tex ; pdftoppm -f 1 -l 1 -aa yes jDM08_expl_engl.pdf /tmp/jDM08_expl_engl ; convert -geometry 300x600 /tmp/jDM08_expl_engl-000001.ppm jDM08_expl_engl.png
@@ -22,7 +22,7 @@
 \documentclass[sans]{amsart}
 
 %
-% Die folgenden Zeilen setzen H�he und Breite der Gallerie-Einleitungen fest:
+% Die folgenden Zeilen setzen Hhe und Breite der Gallerie-Einleitungen fest:
 %
 \newlength{\galIntroHeight}
 \newlength{\galIntroWidth}
@@ -30,7 +30,7 @@
 \setlength{\galIntroWidth}{10.34cm}
 
 %
-% Die folgenden Zeilen setzen H�he und Breite des Erkl�rungs-Textes fest:
+% Die folgenden Zeilen setzen Hhe und Breite des Erklrungs-Textes fest:
 %
 \newlength{\explHeight}
 \newlength{\explWidth}
@@ -38,7 +38,7 @@
 \setlength{\explWidth}{6cm}
 
 %
-% Die folgenden Zeilen setzen einen (leeren, d.h.\ wei�en) 
+% Die folgenden Zeilen setzen einen (leeren, d.h.\ weien) 
 % Rahmen von 0.1 cm um den Text:
 %
 \usepackage[
@@ -61,8 +61,6 @@ paperheight=\galIntroHeight
 % some latex packages we might need:
 %
 \usepackage{showidx}
-\usepackage[latin1]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage{latexsym}
 \usepackage{amsbsy,amscd,amsmath,amstext,amsthm}
 \usepackage{amsfonts}
@@ -75,8 +73,9 @@ paperheight=\galIntroHeight
 \usepackage{graphicx}
 \usepackage[active]{srcltx}
 \usepackage{hyperref}
-\usepackage[german]{babel}
-\usepackage{german}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T2A,T1]{autofe}
 \usepackage{ifthen}
 \usepackage{setspace}
 \onehalfspacing
@@ -246,27 +245,28 @@ paperheight=\galIntroHeight
 \begin{document}
 \footnotesize
 % 
-% Einfache Singularit�ten 
+% Einfache Singularitten 
 %
 \begin{surferGalIntroPage}
-  \begin{galTitle}The Fantasy Surfaces\end{galTitle}
+  \begin{galTitle}Las Superficies de Fantasía\end{galTitle}
   % 
   \begin{surferText}
- 
-We often hear about how complicated mathematics are, but it is a fact that it helps us to understand the complexity of our world. For example through recognition of fundamental structures and important common properties of real objects. Gathering all objects with the same important properties in one \textit{class}, while ignoring the less important properties, is called classification. It is one of the most important means to get an overview of the sheer infinite diversity of the objects and forms of our world. For that, mathematics is fundamental. To decide about what is important or not depends on what you want to understand. This can be for example the size or form of an object.
+
+Muchas veces oímos hablar de lo complicada que es la matemática, pero no podemos negar que nos ayuda a comprender la complejidad del mundo en que vivimos. Por ejemplo, en el reconocimiento de estructuras básicas y en el conocimiento de importantes propiedades de los objetos de la realidad. Una de las formas que tenemos de construir una visión general de estas formas y objetos es clasificándolas. Es decir, reunir todos los objetos que tengan una misma propiedad en una \textit{clase}, e ignorar las de menor importancia. Algo importante podría ser, en principio, el tamaño o la forma de un objeto. Para esto, la matemática es fundamental. Decidir qué es lo importante y qué no lo es, depende de lo que querramos comprender.
 \\
 
 \vspace{0.4cm}
 
-To describe and to classify forms is an old human need, how to do it is not obvious. The old Greek used mainly geometry and proportions of geometrical objects. Later algebra was essentially developed by the Arabs (Al Khwarizmi, 900 B.C.). In the 18th century it was a big achievement by the mathematicians Fermat and Descartes to introduce the coordinate system to describe geometrical relations. This made it possible to use algebra and geometry together.
+Desde los primeros tiempos, describir y clasificar formas es una necesidad humana; cómo hacerlo no es para nada obvio. Los antiguos Griegos usaban fundamentalmente la Geometría y las proporciones de objetos geométricos. Luego, los árabes difundieron el uso del Álgebra (Al Khwarizmi, 900 A.C.). Pero durante el siglo XVIII, la introducción del sistema de coordenadas para describir relaciones geométricas fue un importante trabajo realizado por los matematicos Descartes y Fermat. Esto hizo posible el uso conjunto del Álgebra y la Geometría.
 \\
 \vspace{0.4cm}
-The SURFER programme is a prime example for this relation since it creates geometry (the image) out of algebra (the formula).
-In this gallery you can experience the beauty of mathematics and become creative yourself. Choose one of the surfaces on the right side. The mathematical connection between formula and form is explained through a series of examples in a simple way.\\
-The imagination and intuition comes from your side...
+El programa SURFER es un ejemplo de esta relación, porque crea geometría (la imagen) a partir del álgebra (la fórmula).
+En esta galería podrás experimentar la belleza de la matemática y ser vos mismo el creador. Elegí una de las superficies del lado derecho. La conexión matemática entre la ecuación y la forma está explicada por medio de una serie de ejemplos sencillos. \\
+La imaginación y la intuición van por tu cuenta...
+
       \end{surferText}
 \end{surferGalIntroPage}
-% Einfache singul�re Fl�chen
+% Einfache singulre Flchen
 %
 %
 % Weltrekorde:
