@@ -2,10 +2,10 @@
 % jDM08_expl_engl_galIntros.tex
 %
 % 
-% Einleitungen f�r die Gallerien in surfer.
+% Einleitungen für die Gallerien in surfer.
 %
 % Um aus dem pdf automatisiert ein png-Bild zu erhalten, 
-% k�nnen folgende Kommandos verwendet
+% können folgende Kommandos verwendet
 % werden: 
 %
 % pdflatex jDM08_expl_engl.tex ; pdftoppm -f 1 -l 1 -aa yes jDM08_expl_engl.pdf /tmp/jDM08_expl_engl ; convert -geometry 300x600 /tmp/jDM08_expl_engl-000001.ppm jDM08_expl_engl.png
@@ -22,7 +22,7 @@
 \documentclass[sans]{amsart}
 
 %
-% Die folgenden Zeilen setzen H�he und Breite der Gallerie-Einleitungen fest:
+% Die folgenden Zeilen setzen Höhe und Breite der Gallerie-Einleitungen fest:
 %
 \newlength{\galIntroHeight}
 \newlength{\galIntroWidth}
@@ -30,7 +30,7 @@
 \setlength{\galIntroWidth}{10.34cm}
 
 %
-% Die folgenden Zeilen setzen H�he und Breite des Erkl�rungs-Textes fest:
+% Die folgenden Zeilen setzen Höhe und Breite des Erklärungs-Textes fest:
 %
 \newlength{\explHeight}
 \newlength{\explWidth}
@@ -38,7 +38,7 @@
 \setlength{\explWidth}{6cm}
 
 %
-% Die folgenden Zeilen setzen einen (leeren, d.h.\ wei�en) 
+% Die folgenden Zeilen setzen einen (leeren, d.h.\ weißen) 
 % Rahmen von 0.1 cm um den Text:
 %
 \usepackage[
@@ -61,7 +61,7 @@ paperheight=\galIntroHeight
 % some latex packages we might need:
 %
 \usepackage{showidx}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{latexsym}
 \usepackage{amsbsy,amscd,amsmath,amstext,amsthm}
@@ -75,8 +75,9 @@ paperheight=\galIntroHeight
 \usepackage{graphicx}
 \usepackage[active]{srcltx}
 \usepackage{hyperref}
-\usepackage[german]{babel}
-\usepackage{german}
+\usepackage[utf8x]{inputenc}
+\usepackage[norsk]{babel}
+\usepackage[T2A,T1]{autofe}
 \usepackage{ifthen}
 \usepackage{setspace}
 \onehalfspacing
@@ -247,12 +248,13 @@ paperheight=\galIntroHeight
 \footnotesize
 \begin{surferGalIntroPage}
 
-\begin{surferTitle}World Record Surfaces\end{surferTitle}
+\begin{surferTitle}Flater med verdensrekord\end{surferTitle}
   % 
   \begin{surferText}
-    A surface is called \emph{non-singular} or \emph{smooth} if it does not have any apex (such points are called \emph{singularities}). Examples of smooth surfaces are a sphere or a torus, see the first 2
-    pictures below.  
-    This is almost sure the case when choosing a random surface. 
+    	
+	En flate kalles glatt dersom den ikke har noen toppunkter (slike punkter kalles singulariteter). 
+	Eksempler på glatte flater er en kule eller en torus, se de to første bildene under. 
+	Velger man seg en tilfeldig flate, er den nesten alltid glatt.
  \begin{center}
       \vspace{-0.2cm}
       \begin{tabular}{@{}c@{}c@{}c@{\quad}c@{}c@{}c@{}c@{}}
@@ -287,15 +289,19 @@ paperheight=\galIntroHeight
       \end{tabular}
     \end{center}
     \vspace{-0.2cm}
-    Thus it is very special when a surface exhibits singularities. They are the most interesting points of a surface. The surfaces in the SURFER programme are defined by polynomials. The highest power of a polynomial is called its degree $d$. Mathematicians ask how many singularities  a surface of a certain degree may have.
-    We will denote this number by $\mu(d)$.
-
- It turns out that this number $\mu(d)$ is very difficult to compute.
-    Since the $19$th century, $\mu(d)$ is known for $d=1,2,3,4$, but for $d=5$
-    this number was only identified in 1980, and for $d=6$ in 1996.
-    For $d\ge 7$, $\mu(d)$ is still unknown.
+	
+	Bare spesielle flater har singulariteter. Det gjør singularitetene til flatenes mest 
+  interessante punkter. Flatene i programmet SURFER er definert av polynomer. Den høyeste 
+  eksponenten til et polynom kalles graden til polynomet. Matematikere spør seg hvor mange
+  singulariteter en flate av en bestemt grad kan ha. Vi kaller dette antallet for $\mu(d)$. 
   
-    So, every new world record for a $\mu(d)$ is an important partial result. It seems to take a lot more time to completely solve this problem for arbitrary $d$.\\  A few known results:
+  Det viser seg at antallet $\mu(d)$ er veldig vanskelig å beregne. Siden 1800-tallet har $\mu(d)$ 
+  vært kjent for $d=1,2,3,4$, men ikke før i 1980 fant man det for $d=5$, og i 1996 for $d=6$.
+  For $d\ge 7$, $\mu(d)$ fortsatt ukjent. 
+
+  Enhver ny verdensrekord for $\mu(d)$ er derfor viktig. Det ser ut til å ta tid å finne en komplett løsning av $\mu(d)$ for en 
+  vilkårlig $d$.\\ Her følger noen kjente resultater:
+  
     
    \begin{center}
       \begin{tabular}{r|cccccccc|c}

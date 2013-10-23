@@ -5,11 +5,13 @@
 \newif\if@languageRU
 \newif\if@languageSR
 \newif\if@languageES
+\newif\if@languageNO
 \DeclareOption{de}{\@languageDEtrue}
 \DeclareOption{en}{\@languageENtrue}
 \DeclareOption{ru}{\@languageRUtrue}
 \DeclareOption{sr}{\@languageSRtrue}
 \DeclareOption{es}{\@languageEStrue}
+\DeclareOption{no}{\@languageNOtrue}
 \DeclareOption*{%
 \PackageWarning{SurferDesc}{Unknown option `\CurrentOption'}%
 }
@@ -43,7 +45,12 @@
 \RequirePackage[T2A,T1]{autofe}
 \newcommand{\surferbffont}{\bf}
 \else
-
+\if@languageNO % load packages for norwegian language support
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[norsk]{babel}
+\RequirePackage[T1]{autofe}
+\newcommand{\surferbffont}{\bf}
+\else
 %\if@languageEN % load packages for english language support (default)
 \RequirePackage[latin1]{inputenc}
 \RequirePackage[T1]{fontenc}
