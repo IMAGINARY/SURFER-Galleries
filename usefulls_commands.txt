@@ -14,3 +14,6 @@ find en -name "*.pdf" | sed "s/^en\/\(.*\)_en.pdf/svn cp \0 es\/\1_es.pdf/g" | x
 
 % change the language option in _LANG2 files from LANG1 to LANG2
 find -name "*_LANG2.tex" | xargs sed -r -i 's/\\documentclass\[LANG1\]\{\.\/\.\.\/\.\.\/common\/SurferDesc\}(.*)/\\documentclass[LANG2]{\.\/\.\.\/\.\.\/common\/SurferDesc}\1/g'
+
+% assure PDF compatibility for inclusion in JFXSURFER gallery
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf
