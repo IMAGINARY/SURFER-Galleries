@@ -104,7 +104,7 @@
 \RequirePackage{hyperref}
 \RequirePackage{ifthen}
 %\RequirePackage{pdftex}
-\pdfimageresolution=72
+%\pdfimageresolution=72
 %\pdfminorversion=4
 
 \RequirePackage[scaled=0.92]{helvet}
@@ -219,15 +219,16 @@
 \RequirePackage[force]{filehook}
 \RequirePackage{currfile}
 
+\RequirePackage{etoolbox}
+
+\RequirePackage{microtype}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Begin: surfer stuff
 % (Some environments for the text pages for the surfer software)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\RequirePackage{etoolbox}
-
 
 \newenvironment{surferIntroPage}[1]{% 
   % the page background color:
