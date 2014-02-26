@@ -59,6 +59,9 @@
 %\fi
 \fi
 \fi
+\fi
+\fi
+\fi
 
 
 %
@@ -81,21 +84,7 @@
 % Die folgenden Zeilen setzen einen (leeren, d.h.\ weißen) 
 % Rahmen von 0.1 cm um den Text:
 %
-\RequirePackage[
-paperheight=\explHeight
-,paperwidth=\explWidth
-%,height=9.8cm
-%,width=5.8cm
-,left=0.1cm
-,right=0.1cm
-,bottom=0.1cm
-,top=0.05cm
-]{geometry}
-
-%%%%%
-% it seems to me that the papersize has to be specified here and further down, too.
-%
-\special{papersize=\explHeight,\explWidth}
+\RequirePackage[showframe]{geometry}
 
 %
 % some latex packages we might need:
@@ -112,11 +101,11 @@ paperheight=\explHeight
 \RequirePackage{eso-pic}
 \RequirePackage{graphicx}
 \RequirePackage[active]{srcltx}
-%\RequirePackage{hyperref}
+\RequirePackage{hyperref}
 \RequirePackage{ifthen}
 %\RequirePackage{pdftex}
 \pdfimageresolution=72
-\pdfminorversion=4
+%\pdfminorversion=4
 
 \RequirePackage[scaled=0.92]{helvet}
 \RequirePackage{multicol}
@@ -224,7 +213,11 @@ paperheight=\explHeight
 
 \newcommand{\smcdot}{{\textup{$\cdot$}}}
 
+\newcommand{\UnderscoreCommands}{\do\pdfbookmark}
+\RequirePackage[strings]{underscore}
 
+\RequirePackage[force]{filehook}
+\RequirePackage{currfile}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -233,50 +226,50 @@ paperheight=\explHeight
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newenvironment{surferGalIntroPage}{%
-  % start a new page, if necessary
-  \newpage
-  % it seems to me that the papersize has to be specified here and further up, too
-  \special{papersize=\galIntroHeight,\galIntroWidth}
-  % the page background color:
-  \pagecolor{textHgColor}
-  % the page font color:
-  \color{textFgColor}
-  % no page headers or footers:
-  \thispagestyle{empty}
-  %%%%% 
-  \begin{flushleft}}%
-  {\end{flushleft}}
+\RequirePackage{etoolbox}
 
 
-\newenvironment{surferPage}{%%%%%  % start a new page, if necessary
-  \newpage
-  % it seems to me that the papersize has to be specified here and further up, too
-  \special{papersize=\explHeight,\explWidth}
+\newenvironment{surferIntroPage}[1]{% 
   % the page background color:
-  \pagecolor{textHgColor}
+  \pagecolor{textHgColor}%
   % the page font color:
-  \color{textFgColor}
+  \color{textFgColor}%
   % no page headers or footers:
-  \thispagestyle{empty}
+  \thispagestyle{empty}%
+  % resize font
+  \footnotesize\par%
   %%%%% 
-  \begin{flushleft}}%
+  \begin{flushleft}%
+  {\pdfbookmark{\currfilebase}{\currfilebase}\surferbffont #1}\par}%
 {\end{flushleft}}
 
-\newenvironment{surferTitle}{\surferbffont}{
+\newenvironment{surferPage}[1]{% 
+  % the page background color:
+  \pagecolor{textHgColor}%
+  % the page font color:
+  \color{textFgColor}%
+  % no page headers or footers:
+  \thispagestyle{empty}%
+  % resize font
+  \footnotesize\par%
+  %%%%% 
+  \begin{flushleft}%
+  {\pdfbookmark{\currfilebase}{\currfilebase}\surferbffont #1}\par}%
+{\end{flushleft}}
+
+
+% adjust page geometry for 'surferIntroPage' environment (page layout changes must not be encapsulated in the group of 'surferIntroPage')
+\BeforeBeginEnvironment{surferIntroPage}{%
+  \clearpage%
+  \eject%
+  \global\pdfpagewidth=\galIntroWidth \global\pdfpageheight=\galIntroHeight%
+  \newgeometry{layoutsize={\galIntroWidth,\galIntroHeight},left=0.1cm,right=0.1cm,bottom=0.1cm,top=0.05cm,showframe=true}%  
 }
-\newenvironment{galTitle}{\surferbffont}{
+
+% adjust page geometry for 'surferPage' environment (page layout changes must not be encapsulated in the group of 'surferPage')
+\BeforeBeginEnvironment{surferPage}{%
+  \clearpage%
+  \eject%
+  \global\pdfpagewidth=\explWidth \global\pdfpageheight=\explHeight%
+  \newgeometry{layoutsize={\explWidth,\explHeight},left=0.1cm,right=0.1cm,bottom=0.1cm,top=0.05cm,showframe=true}%  
 }
-\newenvironment{surferText}{}{}
-%\changefont{phv}{m}{n}
-\footnotesize
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% End of: surfer stuff
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
