@@ -18,7 +18,7 @@
 \PackageWarning{SurferDesc}{Unknown option `\CurrentOption'}%
 }
 \ProcessOptions\relax
-\LoadClass{amsart}
+\LoadClass[8pt]{amsart}
 
 \newcommand{\changefont}[3]{
 \fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
@@ -26,44 +26,44 @@
 \RequirePackage[utf8x]{inputenc}
 \RequirePackage[portuguese]{babel}
 \RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf}
+\newcommand{\surferbffont}{\bf\boldmath}
 \else
 \if@languageDE % load packages for german language support
 \RequirePackage[latin1]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[ngerman]{babel}
 \RequirePackage{ngerman}
-\newcommand{\surferbffont}{\changefont{phv}{b}{n}}
+\newcommand{\surferbffont}{\changefont{phv}{b}{n}\boldmath}
 \else
 \if@languageRU % load packages for russian language support
 \RequirePackage[utf8x]{inputenc}
 \RequirePackage[russian]{babel}
 \RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf}
+\newcommand{\surferbffont}{\bf\boldmath}
 \else
 \if@languageSR % load packages for serbian language support
 \RequirePackage[utf8x]{inputenc}
 \RequirePackage[serbian]{babel}
 \RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf}
+\newcommand{\surferbffont}{\bf\boldmath}
 \else
 \if@languageES % load packages for spanish language support
 \RequirePackage[utf8x]{inputenc}
 \RequirePackage[spanish]{babel}
 \RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf}
+\newcommand{\surferbffont}{\bf\boldmath}
 \else
 \if@languageNO % load packages for norwegian language support
 \RequirePackage[utf8x]{inputenc}
 \RequirePackage[norsk]{babel}
 \RequirePackage[T1]{autofe}
-\newcommand{\surferbffont}{\bf}
+\newcommand{\surferbffont}{\bf\boldmath}
 \else
 %\if@languageEN % load packages for english language support (default)
 \RequirePackage[latin1]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[english]{babel}
-\newcommand{\surferbffont}{\changefont{phv}{b}{n}}
+\newcommand{\surferbffont}{\changefont{phv}{b}{n}\boldmath}
 %\fi
 \fi
 \fi
@@ -77,8 +77,8 @@
 %
 \newlength{\galIntroHeight}
 \newlength{\galIntroWidth}
-\setlength{\galIntroHeight}{11.61cm}
-\setlength{\galIntroWidth}{10cm}
+\setlength{\galIntroHeight}{12cm}
+\setlength{\galIntroWidth}{10.34cm}
 
 %
 % Die folgenden Zeilen setzen Höhe und Breite des Erklärungs-Textes fest:
@@ -145,7 +145,7 @@
 \def\bfdefault{bx}
 
 \RequirePackage{sfmath} % use sans serif fonts in math mode
-
+\RequirePackage{scalefnt}
 
 %
 % some colors we'll use further down
@@ -247,8 +247,6 @@
   \color{textFgColor}%
   % no page headers or footers:
   \thispagestyle{empty}%
-  % resize font
-  \footnotesize\par%
   %%%%% 
   \begin{flushleft}%
   {\pdfbookmark{\currfilebase}{\currfilebase}\surferbffont #1}\par}%
@@ -261,8 +259,6 @@
   \color{textFgColor}%
   % no page headers or footers:
   \thispagestyle{empty}%
-  % resize font
-  \footnotesize\par%
   %%%%% 
   \begin{flushleft}%
   {\pdfbookmark{\currfilebase}{\currfilebase}\surferbffont #1}\par}%
