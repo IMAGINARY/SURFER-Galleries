@@ -231,6 +231,8 @@
 
 \RequirePackage{microtype}
 
+\RequirePackage{csquotes}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Begin: surfer stuff
