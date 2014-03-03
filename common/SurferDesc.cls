@@ -6,12 +6,14 @@
 \newif\if@languageSR
 \newif\if@languageES
 \newif\if@languageNO
+\newif\if@languagePT
 \DeclareOption{de}{\@languageDEtrue}
 \DeclareOption{en}{\@languageENtrue}
 \DeclareOption{ru}{\@languageRUtrue}
 \DeclareOption{sr}{\@languageSRtrue}
 \DeclareOption{es}{\@languageEStrue}
 \DeclareOption{no}{\@languageNOtrue}
+\DeclareOption{pt}{\@languagePTtrue}
 \DeclareOption*{%
 \PackageWarning{SurferDesc}{Unknown option `\CurrentOption'}%
 }
@@ -20,6 +22,12 @@
 
 \newcommand{\changefont}[3]{
 \fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+\if@languagePT % load packages for portuguese language support
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[portuguese]{babel}
+\RequirePackage[T2A,T1]{autofe}
+\newcommand{\surferbffont}{\bf}
+\else
 \if@languageDE % load packages for german language support
 \RequirePackage[latin1]{inputenc}
 \RequirePackage[T1]{fontenc}
@@ -62,7 +70,7 @@
 \fi
 \fi
 \fi
-
+\fi
 
 %
 % Die folgenden Zeilen setzen Höhe und Breite der Gallerie-Einleitungen fest:
