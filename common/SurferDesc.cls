@@ -1,76 +1,39 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{SurferDesc}[2012/06/26 Class for Surfer description files]
-\newif\if@languageDE
-\newif\if@languageEN
-\newif\if@languageRU
-\newif\if@languageSR
-\newif\if@languageES
-\newif\if@languageNO
-\newif\if@languagePT
-\DeclareOption{de}{\@languageDEtrue}
-\DeclareOption{en}{\@languageENtrue}
-\DeclareOption{ru}{\@languageRUtrue}
-\DeclareOption{sr}{\@languageSRtrue}
-\DeclareOption{es}{\@languageEStrue}
-\DeclareOption{no}{\@languageNOtrue}
-\DeclareOption{pt}{\@languagePTtrue}
 \DeclareOption*{%
 \PackageWarning{SurferDesc}{Unknown option `\CurrentOption'}%
 }
 \ProcessOptions\relax
 \LoadClass[8pt]{amsart}
 
-\newcommand{\changefont}[3]{
-\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
-\if@languagePT % load packages for portuguese language support
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[portuguese]{babel}
-\RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf\boldmath}
-\else
-\if@languageDE % load packages for german language support
-\RequirePackage[latin1]{inputenc}
-\RequirePackage[T1]{fontenc}
-\RequirePackage[ngerman]{babel}
-\RequirePackage{ngerman}
-\newcommand{\surferbffont}{\changefont{phv}{b}{n}\boldmath}
-\else
-\if@languageRU % load packages for russian language support
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[russian]{babel}
-\RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf\boldmath}
-\else
-\if@languageSR % load packages for serbian language support
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[serbian]{babel}
-\RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf\boldmath}
-\else
-\if@languageES % load packages for spanish language support
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[spanish]{babel}
-\RequirePackage[T2A,T1]{autofe}
-\newcommand{\surferbffont}{\bf\boldmath}
-\else
-\if@languageNO % load packages for norwegian language support
-\RequirePackage[utf8x]{inputenc}
-\RequirePackage[norsk]{babel}
-\RequirePackage[T1]{autofe}
-\newcommand{\surferbffont}{\bf\boldmath}
-\else
-%\if@languageEN % load packages for english language support (default)
-\RequirePackage[latin1]{inputenc}
-\RequirePackage[T1]{fontenc}
-\RequirePackage[english]{babel}
-\newcommand{\surferbffont}{\changefont{phv}{b}{n}\boldmath}
-%\fi
-\fi
-\fi
-\fi
-\fi
-\fi
-\fi
+\RequirePackage[force]{filehook}
+\RequirePackage{currfile}
+
+\RequirePackage{etoolbox,xparse}
+
+\RequirePackage{latexsym}
+\RequirePackage{amsbsy,amscd,amsmath,amstext,amsthm}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{dsfont}
+\RequirePackage{sfmath} % use sans serif fonts in math mode
+
+\RequirePackage[no-math]{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[
+  Ligatures=TeX,
+  Extension=.otf,
+  SlantedFont=cmunsi,
+  BoldFont=cmunsx,
+  ItalicFont=cmunsi,
+  BoldItalicFont=cmunso
+]{cmunss}
+\RequirePackage{polyglossia}
+
+
+\newcommand{\surferbffont}{\bfseries\boldmath}
+
+\renewcommand*{\familydefault}{\sfdefault}
 
 %
 % Die folgenden Zeilen setzen Höhe und Breite der Gallerie-Einleitungen fest:
@@ -92,18 +55,13 @@
 % Die folgenden Zeilen setzen einen (leeren, d.h.\ weißen) 
 % Rahmen von 0.1 cm um den Text:
 %
-\RequirePackage[showframe]{geometry}
+\RequirePackage{geometry}
 
 %
 % some latex packages we might need:
 %
 \RequirePackage{showidx}
-\RequirePackage{latexsym}
-\RequirePackage{amsbsy,amscd,amsmath,amstext,amsthm}
-\RequirePackage{amsfonts}
-\RequirePackage{amssymb}
 \RequirePackage{color}
-\RequirePackage{dsfont}
 \RequirePackage{varioref}
 \RequirePackage{epsfig}
 \RequirePackage{eso-pic}
@@ -115,7 +73,6 @@
 %\pdfimageresolution=72
 %\pdfminorversion=4
 
-\RequirePackage[scaled=0.92]{helvet}
 \RequirePackage{multicol}
 \RequirePackage{pstricks,pst-grad}
 \RequirePackage{rotating}
@@ -134,17 +91,6 @@
 \setlength{\parindent}{0pt} 
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 
-%
-% don't use any roman fonts:
-%
-\def\rmdefault{cmss}        % no roman
-\def\sfdefault{cmss}
-\def\ttdefault{cmtt}
-\def\itdefault{sl}
-\def\sldefault{sl}
-\def\bfdefault{bx}
-
-\RequirePackage{sfmath} % use sans serif fonts in math mode
 \RequirePackage{scalefnt}
 
 %
@@ -221,13 +167,9 @@
 
 \newcommand{\smcdot}{{\textup{$\cdot$}}}
 
-\newcommand{\UnderscoreCommands}{\do\pdfbookmark}
+\newcommand{\UnderscoreCommands}{\do\currentpdfbookmark \do\belowpdfbookmark}
 \RequirePackage[strings]{underscore}
 
-\RequirePackage[force]{filehook}
-\RequirePackage{currfile}
-
-\RequirePackage{etoolbox}
 
 \RequirePackage{microtype}
 
@@ -240,7 +182,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newenvironment{surferIntroPage}[1]{% 
+\DeclareDocumentEnvironment{surferIntroPage}{m m +m}{% 
   % the page background color:
   \pagecolor{textHgColor}%
   % the page font color:
@@ -249,10 +191,16 @@
   \thispagestyle{empty}%
   %%%%% 
   \begin{flushleft}%
-  {\pdfbookmark{\currfilebase}{\currfilebase}\surferbffont #1}\par}%
+  {%
+    \currentpdfbookmark{#1}{\currfilebase}
+    \belowpdfbookmark{#2}{\currfilebase.fileprefix}
+    \surferbffont #3
+  }\par%
+  }%
 {\end{flushleft}}
 
-\newenvironment{surferPage}[1]{% 
+\DeclareDocumentEnvironment{surferPage}{o +m}{% 
+  \def\surferPage@title{#2}
   % the page background color:
   \pagecolor{textHgColor}%
   % the page font color:
@@ -261,7 +209,12 @@
   \thispagestyle{empty}%
   %%%%% 
   \begin{flushleft}%
-  {\pdfbookmark{\currfilebase}{\currfilebase}\surferbffont #1}\par}%
+  {%
+    \currentpdfbookmark{\IfValueTF{#1}{#1}{\surferPage@title}}{\currfilebase}
+    \belowpdfbookmark{\currfilebase}{\currfilebase.fileprefix}
+    \surferbffont #2
+  }\par%
+  }%
 {\end{flushleft}}
 
 
