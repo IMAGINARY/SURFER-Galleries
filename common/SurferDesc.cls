@@ -1,24 +1,24 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{SurferDesc}[2012/06/26 Class for Surfer description files]
-\DeclareOption*{%
-\PackageWarning{SurferDesc}{Unknown option `\CurrentOption'}%
-}
+\ProvidesClass{SurferDesc}[2014/03/13 Class for Surfer description files]
+\DeclareOption*{\PackageWarning{SurferDesc}{Unknown option `\CurrentOption'}}
 \ProcessOptions\relax
+
+% base this documentcalss on AMS article
 \LoadClass[8pt]{amsart}
 
-\RequirePackage[force]{filehook}
-\RequirePackage{currfile}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fonts, symbols, hyphenation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\RequirePackage{etoolbox,xparse}
+% enhanced math typesetting and symbols
+\RequirePackage{amsmath,amsfonts,amssymb}
+\newcommand{\RR}{{\mathbb R}}
 
-\RequirePackage{latexsym}
-\RequirePackage{amsbsy,amscd,amsmath,amstext,amsthm}
-\RequirePackage{amsfonts}
-\RequirePackage{amssymb}
-\RequirePackage{dsfont}
-\RequirePackage{sfmath} % use sans serif fonts in math mode
+% sans serif fonts in math mode
+\RequirePackage{sfmath}
 
-\RequirePackage[no-math]{fontspec}
+% load Computer Modern Unicode Sans Serif fonts
+\RequirePackage[no-math]{fontspec} 
 \defaultfontfeatures{Mapping=tex-text}
 \setmainfont[
   Ligatures=TeX,
@@ -28,160 +28,79 @@
   ItalicFont=cmunsi,
   BoldItalicFont=cmunso
 ]{cmunss}
+
+% hyphenation support
 \RequirePackage{polyglossia}
 
+% subliminal refinements towards typographical perfection
+\RequirePackage{microtype}
 
-\newcommand{\surferbffont}{\bfseries\boldmath}
-
+% default font family: sans serif instead of roman
 \renewcommand*{\familydefault}{\sfdefault}
 
-%
-% Die folgenden Zeilen setzen Höhe und Breite der Gallerie-Einleitungen fest:
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Layout related stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% required to set page geometry for each page
+\RequirePackage{geometry}
+
+% size of gallery introduction pages
 \newlength{\galIntroHeight}
 \newlength{\galIntroWidth}
 \setlength{\galIntroHeight}{12cm}
 \setlength{\galIntroWidth}{10.34cm}
 
-%
-% Die folgenden Zeilen setzen Höhe und Breite des Erklärungs-Textes fest:
-%
+% size of regular gallery page
 \newlength{\explHeight}
 \newlength{\explWidth}
 \setlength{\explHeight}{11.5cm}
 \setlength{\explWidth}{7.46cm}
 
-%
-% Die folgenden Zeilen setzen einen (leeren, d.h.\ weißen) 
-% Rahmen von 0.1 cm um den Text:
-%
-\RequirePackage{geometry}
-
-%
-% some latex packages we might need:
-%
-\RequirePackage{showidx}
-\RequirePackage{color}
-\RequirePackage{varioref}
-\RequirePackage{epsfig}
-\RequirePackage{eso-pic}
-\RequirePackage{graphicx}
-\RequirePackage[active]{srcltx}
-\RequirePackage{hyperref}
-\RequirePackage{ifthen}
-%\RequirePackage{pdftex}
-%\pdfimageresolution=72
-%\pdfminorversion=4
-
-\RequirePackage{multicol}
-\RequirePackage{pstricks,pst-grad}
-\RequirePackage{rotating}
+% use line spacing of one and a half
 \RequirePackage{setspace}
 \onehalfspacing
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Layout related stuff
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%
-% for no indenting for a new paragraph:
-%
+% do not indent paragraphs
 \setlength{\parindent}{0pt} 
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 
-\RequirePackage{scalefnt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%
-% some colors we'll use further down
-%
-\newrgbcolor{lightgrey}{.8 .8 .8}
-\newrgbcolor{lightocher}{0.9 0.9 0.7}
-\newrgbcolor{ocher}{0.7 0.7 0.5}
-%\newrgbcolor{lightgrey}{.8 .8 .8}
-%\newrgbcolor{lightocher}{0.9 0.9 0.65}
-%\newrgbcolor{ocher}{0.7 0.7 0.35}
-%\newrgbcolor{lightgrey}{.8 .8 .8}
-%\newrgbcolor{lightocher}{0.8 0.8 0.8}
-%\newrgbcolor{ocher}{0.7 0.7 0.7}
-
-%
-%
-%
-\definecolor{titleHgColor}{rgb}{0.0,0.0,0.0}
-\definecolor{titleFgColor}{rgb}{0.9,0.9,0.7}
-\definecolor{titleFgColorSnd}{rgb}{1.0,1.0,0.8}
-
-\definecolor{picsHgColor}{rgb}{0.0,0.0,0.0}
-\definecolor{picsFgColor}{rgb}{0.9,0.9,0.7}
-\definecolor{picsFgColorSnd}{rgb}{0.95,0.95,0.75}
-
-% white bg:
-\definecolor{textHgColor}{rgb}{1.0,1.0,1.0}
-% light ocker bg:
-%\definecolor{textHgColor}{rgb}{0.69,0.62,0.41}
-\definecolor{textFgColor}{rgb}{0.15,0.15,0.1}
-\definecolor{textFgColorSnd}{rgb}{0.4,0.4,0.2}
-\definecolor{textFgColorDark}{rgb}{0.1,0.1,0.07}
-
-%
-% some commands we often use:
-%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%The black board font
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\newcommand{\bK}{{\bf K}}
-\newcommand{\bK}{{\Bbbk}}
-%\newcommand{\bK}{{\mathbb k}}
-\newcommand{\AAA}{{\mathbb A}}
-\newcommand{\BB}{{\mathbb B}}
-\newcommand{\CC}{{\mathbb C}}
-\newcommand{\DD}{{\mathbb D}}
-\newcommand{\EE}{{\mathbb E}}
-\newcommand{\FF}{{\mathbb F}}
-\newcommand{\GG}{{\mathbb G}}
-%\newcommand{\HH}{{\mathbb H}}
-\newcommand{\II}{{\mathbb I}}
-\newcommand{\JJ}{{\mathbb J}}
-\newcommand{\KK}{{\mathbb K}}
-%\newcommand{\LL}{{\mathbb L}}
-\newcommand{\MM}{{\mathbb M}}
-\newcommand{\NN}{{\mathbb N}}
-%\newcommand{{\mathbb O}}
-\newcommand{\PP}{{\mathbb P}}
-\newcommand{\QQ}{{\mathbb Q}}
-\newcommand{\RR}{{\mathbb R}}
-\newcommand{\SSS}{{\mathbb S}}
-\newcommand{\TT}{{\mathbb T}}
-\newcommand{\UU}{{\mathbb U}}
-\newcommand{\VV}{{\mathbb V}}
-\newcommand{\WW}{{\mathbb W}}
-\newcommand{\XX}{{\mathbb X}}
-\newcommand{\YY}{{\mathbb Y}}
-\newcommand{\ZZ}{{\mathbb Z}}
-
-
-\newcommand{\dontshow}[1]{}
-
-\newcommand{\smcdot}{{\textup{$\cdot$}}}
-
-\newcommand{\UnderscoreCommands}{\do\currentpdfbookmark \do\belowpdfbookmark}
-\RequirePackage[strings]{underscore}
-
-
-\RequirePackage{microtype}
-
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{hyperref}
 \RequirePackage{csquotes}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Begin: surfer stuff
-% (Some environments for the text pages for the surfer software)
-%
+% Environments for the SURFER gallery pages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% provides macros containing the current file name (of included files)
+\RequirePackage[force]{filehook}
+\RequirePackage{currfile}
+
+% patch some macros to allow underscores as part of arguments
+\newcommand{\UnderscoreCommands}{\do\currentpdfbookmark \do\belowpdfbookmark}
+\RequirePackage[strings]{underscore}
+
+% enhanced declaration of new commands and environment
+\RequirePackage{xparse}
+
+% patch commands and enviroments
+\RequirePackage{etoolbox}
+
+% colors for fore- and background
+\definecolor{textHgColor}{rgb}{1.0,1.0,1.0}
+\definecolor{textFgColor}{rgb}{0.15,0.15,0.1}
+
+
+% introduction page for a gallery; arguments:
+%  #1 title of the gallery (mandatory)
+%  #2 base name of the jsurf/png file to be used as a gallery icon (mandatory)
+%  #3 page title of the gallery introduction page (mandatory)
 \DeclareDocumentEnvironment{surferIntroPage}{m m +m}{% 
   % the page background color:
   \pagecolor{textHgColor}%
@@ -194,11 +113,14 @@
   {%
     \currentpdfbookmark{#1}{\currfilebase}
     \belowpdfbookmark{#2}{\currfilebase.fileprefix}
-    \surferbffont #3
+    \bfseries\boldmath #3
   }\par%
   }%
 {\end{flushleft}}
 
+% gallery page; arguments:
+%  #1 icon label of this page (defaults to page title if not specified) (optional)
+%  #2 page title of the gallery page (mandatory)
 \DeclareDocumentEnvironment{surferPage}{o +m}{% 
   \def\surferPage@title{#2}
   % the page background color:
@@ -212,7 +134,7 @@
   {%
     \currentpdfbookmark{\IfValueTF{#1}{#1}{\surferPage@title}}{\currfilebase}
     \belowpdfbookmark{\currfilebase}{\currfilebase.fileprefix}
-    \surferbffont #2
+    \bfseries\boldmath #2
   }\par%
   }%
 {\end{flushleft}}
