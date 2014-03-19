@@ -71,7 +71,7 @@
 
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
-\RequirePackage{hyperref}
+\RequirePackage[bookmarksopen=true]{hyperref}
 \RequirePackage{csquotes}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
