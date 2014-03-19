@@ -139,12 +139,16 @@
   }%
 {\end{flushleft}}
 
+% scale up each page (required since LGPL JPedal PDF renderer only renders at 72dpi)
+\usepackage{blowup}
+\def\SurferDesc@pageScaleFactor{3}
+\blowUp{paper=x\SurferDesc@pageScaleFactor}
 
 % adjust page geometry for 'surferIntroPage' environment (page layout changes must not be encapsulated in the group of 'surferIntroPage')
 \BeforeBeginEnvironment{surferIntroPage}{%
   \clearpage%
   \eject%
-  \global\pdfpagewidth=\galIntroWidth \global\pdfpageheight=\galIntroHeight%
+  \global\pdfpagewidth=\SurferDesc@pageScaleFactor\galIntroWidth \global\pdfpageheight=\SurferDesc@pageScaleFactor\galIntroHeight%
   \newgeometry{layoutsize={\galIntroWidth,\galIntroHeight},left=0.1cm,right=0.1cm,bottom=0.1cm,top=0.05cm,showframe=true}%  
 }
 
@@ -152,6 +156,6 @@
 \BeforeBeginEnvironment{surferPage}{%
   \clearpage%
   \eject%
-  \global\pdfpagewidth=\explWidth \global\pdfpageheight=\explHeight%
+  \global\pdfpagewidth=\SurferDesc@pageScaleFactor\explWidth \global\pdfpageheight=\SurferDesc@pageScaleFactor\explHeight%
   \newgeometry{layoutsize={\explWidth,\explHeight},left=0.1cm,right=0.1cm,bottom=0.1cm,top=0.05cm,showframe=true}%  
 }
