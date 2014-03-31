@@ -14,7 +14,17 @@
 \RequirePackage{amsmath,amsfonts,amssymb}
 \newcommand{\RR}{{\mathbb R}}
 
+% sans serif fonts in math mode
+\RequirePackage{sfmath}
 
+% support for Korean script
+\usepackage{kotex}
+
+% subliminal refinements towards typographical perfection
+\RequirePackage{microtype}
+
+% default font family: sans serif instead of roman
+\renewcommand*{\familydefault}{\sfdefault}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Layout related stuff
