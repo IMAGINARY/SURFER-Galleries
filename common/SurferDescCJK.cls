@@ -14,29 +14,7 @@
 \RequirePackage{amsmath,amsfonts,amssymb}
 \newcommand{\RR}{{\mathbb R}}
 
-% sans serif fonts in math mode
-\RequirePackage{sfmath}
 
-% load Computer Modern Unicode Sans Serif fonts
-\RequirePackage[no-math]{fontspec} 
-\defaultfontfeatures{Mapping=tex-text}
-\setmainfont[
-  Ligatures=TeX,
-  Extension=.otf,
-  SlantedFont=cmunsi,
-  BoldFont=cmunsx,
-  ItalicFont=cmunsi,
-  BoldItalicFont=cmunso
-]{cmunss}
-
-% hyphenation support
-\RequirePackage{polyglossia}
-
-% subliminal refinements towards typographical perfection
-\RequirePackage{microtype}
-
-% default font family: sans serif instead of roman
-\renewcommand*{\familydefault}{\sfdefault}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Layout related stuff
