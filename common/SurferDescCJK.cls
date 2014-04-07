@@ -18,7 +18,11 @@
 \RequirePackage{sfmath}
 
 % support for Korean script
+\RequirePackage[no-math]{fontspec} 
 \usepackage{kotex}
+
+\setmainhangulfont[Ligatures=TeX,BoldFont=NanumMyeongjoBold,AutoFakeSlant]{NanumMyeongjo}
+\setsanshangulfont[Ligatures=TeX,BoldFont=NanumGothicBold,AutoFakeSlant]{NanumGothic}
 
 % subliminal refinements towards typographical perfection
 \RequirePackage{microtype}
