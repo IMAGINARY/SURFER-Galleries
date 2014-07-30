@@ -22,8 +22,8 @@
 
 \usepackage{xeCJK}
 \IfFileExists{wqy-zenhei.ttc}%
-  {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=2.75,AutoFakeSlant]{wqy-zenhei.ttc}}
-  {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=2.75,AutoFakeSlant]{WenQuanYi Zen Hei}}
+  {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{wqy-zenhei.ttc}}
+  {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{WenQuanYi Zen Hei}}
 
 % subliminal refinements towards typographical perfection
 \RequirePackage{microtype}
