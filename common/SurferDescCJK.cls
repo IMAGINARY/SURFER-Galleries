@@ -20,7 +20,7 @@
 % support for Chinese-Japanese-Korean script
 \RequirePackage[no-math]{fontspec} 
 
-\usepackage{xeCJK}
+\usepackage[space]{xeCJK}
 \IfFileExists{wqy-zenhei.ttc}%
   {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{wqy-zenhei.ttc}}
   {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{WenQuanYi Zen Hei}}
