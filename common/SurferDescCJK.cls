@@ -17,12 +17,13 @@
 % sans serif fonts in math mode
 \RequirePackage{sfmath}
 
-% support for Korean script
+% support for Chinese-Japanese-Korean script
 \RequirePackage[no-math]{fontspec} 
-\usepackage{kotex}
 
-\setmainhangulfont[Ligatures=TeX,BoldFont=NanumMyeongjoBold,AutoFakeSlant]{NanumMyeongjo}
-\setsanshangulfont[Ligatures=TeX,BoldFont=NanumGothicBold,AutoFakeSlant]{NanumGothic}
+\usepackage[space]{xeCJK}
+\IfFileExists{wqy-zenhei.ttc}%
+  {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{wqy-zenhei.ttc}}
+  {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{WenQuanYi Zen Hei}}
 
 % subliminal refinements towards typographical perfection
 \RequirePackage{microtype}
