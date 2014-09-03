@@ -50,15 +50,79 @@ You have to edit these three files depending on the *type of language* you are t
  2. non-CJK to CJK language: change the document class from `SurferDesc` to `SurferDescCJK` and delete the `\setmainlanguage{...}` line
  3. CJK to CJK language: nothing to do 
 
-Now you are ready to translate the document. Please keep your document structure and LaTeX source (math/figures) as close as possible to the other translations. We usually use a visual diff and merge tool to have the original and the new translation side by side. Using e.g. [meld](http://meldmerge.org/) it looks like this:
+Now you are ready to translate the galleries (all `.tex` files except the main file). Please keep your document structure and LaTeX source (math/figures) as close as possible to the other translations. We usually use a visual diff and merge tool to have the original and the new translation side by side. Using e.g. [meld](http://meldmerge.org/) it looks like this:
 
 ![Side-by-side editing using meld](https://raw.github.com/IMAGINARY/Arnold5to15/gh-pages/images/meld.png "Side-by-side editing using meld")
 
 Using the side-by-side editing also avoids many common erros, e.g. you will notice inline math you messed up by accident due to the highlighted changes.
 
-During the translation of the text from one language to another you should also consider to review a third translation as well since translations are usually not literal. Try to stay close to the German and English version although this may not always be possible. 
+During the translation of the text from one language to another you should also consider to review a third translation as well since translations are usually not literal. Try to stay close to the German and English version although this may not always be possible.
 
 Please also add your name(s) at the end of the `AUTHORS` file. 
+
+#### Structure of the galleries
+
+SURFER has to know certain details about the structure of the galleries in order to display them in the program. This structure is stored in the output filename (e.g. `fantasy_en.pdf` contains the name of the gallery and its language) and within the hierarchical bookmarks of the pdf file, e.g. for the English `fantasy` gallery it looks like this (indented lines are nested items):
+```
+Fantasy Surfaces
+    fantasy_kolibri
+Zitrus
+    fantasy_zitrus
+Tick
+    fantasy_zeck
+Hummingbird
+    fantasy_kolibri
+Nozzle
+    fantasy_tuelle
+Helix
+    fantasy_helix
+Nepali
+    fantasy_nepali
+Heaven and Hell
+    fantasy_himmel
+Quaste
+    fantasy_quaste
+Ding Dong
+    fantasy_dingdong
+Vis à Vis
+    fantasy_visavis
+Sweet
+    fantasy_suess
+Dullo
+    fantasy_dullo
+```
+
+The first level always contains the label for the respective gallery (very first line) respectively gallery item of this gallery (third line to the end). The names at the second level are used for two purposes:
+
+ 1. The file name of the surface description file to load when this gallery item is clicked. The file extension `.jsurf` is added automatically.
+ 2. The file name of the prerendered icon for the gallery (item). Again, the file extension `.png` is added automatically.
+
+The bookmarks are created by means of two LaTeX environments.
+
+##### The surferIntroPage environment
+
+Syntax:
+```
+\begin{surferIntroPage}{Gallery label}{icon}{Page title}
+Text of the gallery introduction page
+\end{surferIntroPage}
+```
+This enviroment is used for the very first page in a gallery containing general information about the gallery. 
+
+For `icon` use the name of a PNG file (omitting the file extension `.png`). Usually, you can just leave the icon untouched. It is better to use the same icon for all languages.
+
+##### The surferPage environment
+
+Syntax:
+```
+\begin{surferPage}[Gallery item label]{Page title}
+Text of the gallery page
+\end{surferPage}
+```
+
+This environment is used for all but the very first page in a gallery to describe the surface associated with this gallery page. 
+
+The optional `Gallery item label` is displayed in the gallery overview and may be omitted if the page title should be used as a label. Keep in mind that the label (resp. page title if label is omitted) should be concise since there is not much space to display it in the program.
 
 ### Improving existing translations
 
