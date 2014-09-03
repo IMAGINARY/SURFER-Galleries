@@ -54,7 +54,7 @@ You have to edit these three files depending on the *type of language* you are t
 
 Now you are ready to translate the galleries (all `.tex` files except the main file). Please keep your document structure and LaTeX source (math/figures) as close as possible to the other translations. We usually use a visual diff and merge tool to have the original and the new translation side by side. Using e.g. [meld](http://meldmerge.org/) it looks like this:
 
-![Side-by-side editing using meld](https://raw.github.com/IMAGINARY/Arnold5to15/gh-pages/images/meld.png "Side-by-side editing using meld")
+![Side-by-side editing using meld](https://raw.github.com/IMAGINARY/SURFER-Galleries/gh-pages/images/meld.png "Side-by-side editing using meld")
 
 Using the side-by-side editing also avoids many common erros, e.g. you will notice inline math you messed up by accident due to the highlighted changes.
 
