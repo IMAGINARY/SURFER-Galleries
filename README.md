@@ -31,6 +31,8 @@ Contributions
 
 We encourage you to add translations for new languages and to improve existing ones. Note that by sending us your contributions you agree that they will be published under the license stated at the end of this file. 
 
+Please read the entire guide before starting any action.
+
 ### Adding a new translation
 
 First, look up your two-letter IETF BCP 47 language tag using [this search engine](http://rishida.net/utils/subtags/). 
