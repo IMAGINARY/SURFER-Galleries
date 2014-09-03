@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>SURFER: galleries by IMAGINARY</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>SURFER: galleries</h1>
+          <h2>LaTeX sources of the galleries that come with the SURFER program</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/IMAGINARY/SURFER-Galleries/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/IMAGINARY/SURFER-Galleries/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/IMAGINARY/SURFER-Galleries" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="galleries-of-the-surfer-program" class="anchor" href="#galleries-of-the-surfer-program"><span class="octicon octicon-link"></span></a>Galleries of the SURFER program</h1>
+
+<p>This repository contains the LaTeX sources of the galleries that come with the <a href="http://imaginary.org/program/surfer/">SURFER</a> program. They consist of a tutorial gallery, a gallery containing so-called world record surfaces (i.e. surfaces with many singularities) and a galleriy with surfaces which are just nice (fantasy surfaces).</p>
+
+<p>The galleries have already been translated to various languages other then the English and German. Translations to additional languages as well as improvements of existing translations are highly welcome.</p>
+
+<h2>
+<a name="compiling-the-latex-sources-to-pdf" class="anchor" href="#compiling-the-latex-sources-to-pdf"><span class="octicon octicon-link"></span></a>Compiling the LaTeX sources to PDF</h2>
+
+<p>First of all, you need to install a TeX distribution like <a href="https://www.tug.org/texlive/">TeXLive</a> or <a href="http://www.miktex.org/">MikTeX</a>. It is highly recommended to install the full distribution (all available packages). This usually causes the least trouble. If you only installed a TeX base system, you may need to install additional packages (at least <code>xelatex</code> and all the packages listed within <code>\RequirePackage</code> commands in <code>common/SurferDesc.cls</code> respectively <code>common/SurferDescCJK.cls</code>). For MikTeX, you also need to download the <a href="http://www.ctan.org/tex-archive/macros/latex/contrib/sfmath/sfmath.sty">sfmath package</a> and put it somewhere LaTeX can find it (for some reason, <code>sfmath</code> is not part of the MikTeX distribution).</p>
+
+<p>Choose a gallery and a language to compile, e.g. <code>fantasy</code> (fantasy surfaces) and <code>en</code> (English). Change to the appropriate directory:</p>
+
+<pre><code>cd fantasy/en
+</code></pre>
+
+<p>The main LaTeX file is always <code>galleryname_language.tex</code>, e.g. <code>fantasy_en.tex</code>. Compile it using</p>
+
+<pre><code>xelatex --shell-escape fantasy_en.tex
+</code></pre>
+
+<p>The other files in the respective folder are included by the main file. There is no need to touch them.</p>
+
+<p>You may need to repeat the compilation several times until all references and hyperlinks are resolved.</p>
+
+<p>If you are on a Unix-like system you may also call the <code>compile_all.sh</code> bash script in the top folder to create all gallery PDFs in all languages. This needs <code>latexmk</code> to be installed on your system.</p>
+
+<h2>
+<a name="contributions" class="anchor" href="#contributions"><span class="octicon octicon-link"></span></a>Contributions</h2>
+
+<p>We encourage you to add translations for new languages and to improve existing ones. Note that by sending us your contributions you agree that they will be published under the license stated at the end of this file. </p>
+
+<p>Please read the entire guide before starting any action.</p>
+
+<h3>
+<a name="adding-a-new-translation" class="anchor" href="#adding-a-new-translation"><span class="octicon octicon-link"></span></a>Adding a new translation</h3>
+
+<p>First, look up your two-letter IETF BCP 47 language tag using <a href="http://rishida.net/utils/subtags/">this search engine</a>. </p>
+
+<p>Assume you want to translate from English (<code>en</code>) to Turkish (<code>tr</code>). (Replace <code>en</code> and <code>tr</code> with the tags that fit your needs). Now, for each gallery (<code>fantasy</code>, <code>record</code>, <code>tutorial</code>), create a copy of the <code>en</code> subfolder and rename it to <code>tr</code>.</p>
+
+<p>Rename the main files of each galery to include the new language tag, e.g. rename</p>
+
+<pre><code>fantasy_en.tex  -&gt; fantasy_tr.tex
+record_en.tex   -&gt; record_tr.tex
+tutorial_en.tex -&gt; tutorial_tr.tex
+</code></pre>
+
+<p>You have to edit these three files depending on the <em>type of language</em> you are translation from and to. Currently, every language supported by the <code>polyglossia</code> package should work as well as so called CJK languages (Chinese-Japanese-Korean). If your language is not in this list, please <a href="https://github.com/IMAGINARY/SURFER-Galleries/issues/new">report this issue</a>.</p>
+
+<ol>
+<li>non-CJK to non-CJK language: change the line <code>\setmainlanguage{...}</code> to reflect your language (see the <a href="http://mirrors.ctan.org/macros/latex/contrib/polyglossia/polyglossia.pdf">documentation</a> of <code>polyglossia</code>)</li>
+<li>non-CJK to CJK language: change the document class from <code>SurferDesc</code> to <code>SurferDescCJK</code> and delete the <code>\setmainlanguage{...}</code> line</li>
+<li>CJK to CJK language: nothing to do </li>
+</ol><p>Now you are ready to translate the galleries (all <code>.tex</code> files except the main file). Please keep your document structure and LaTeX source (math/figures) as close as possible to the other translations. We usually use a visual diff and merge tool to have the original and the new translation side by side. Using e.g. <a href="http://meldmerge.org/">meld</a> it looks like this:</p>
+
+<p><img src="https://raw.github.com/IMAGINARY/Arnold5to15/gh-pages/images/meld.png" alt="Side-by-side editing using meld" title="Side-by-side editing using meld"></p>
+
+<p>Using the side-by-side editing also avoids many common erros, e.g. you will notice inline math you messed up by accident due to the highlighted changes.</p>
+
+<p>During the translation of the text from one language to another you should also consider to review a third translation as well since translations are usually not literal. Try to stay close to the German and English version although this may not always be possible.</p>
+
+<p>Please also add your name(s) at the end of the <code>AUTHORS</code> file. </p>
+
+<h4>
+<a name="structure-of-the-galleries" class="anchor" href="#structure-of-the-galleries"><span class="octicon octicon-link"></span></a>Structure of the galleries</h4>
+
+<p>SURFER has to know certain details about the structure of the galleries in order to display them in the program. This structure is stored in the output filename (e.g. <code>fantasy_en.pdf</code> contains the name of the gallery and its language) and within the hierarchical bookmarks of the pdf file, e.g. for the English <code>fantasy</code> gallery it looks like this (indented lines are nested items):</p>
+
+<pre><code>Fantasy Surfaces
+    fantasy_kolibri
+Zitrus
+    fantasy_zitrus
+Tick
+    fantasy_zeck
+Hummingbird
+    fantasy_kolibri
+Nozzle
+    fantasy_tuelle
+Helix
+    fantasy_helix
+Nepali
+    fantasy_nepali
+Heaven and Hell
+    fantasy_himmel
+Quaste
+    fantasy_quaste
+Ding Dong
+    fantasy_dingdong
+Vis à Vis
+    fantasy_visavis
+Sweet
+    fantasy_suess
+Dullo
+    fantasy_dullo
+</code></pre>
+
+<p>The first level always contains the label for the respective gallery (very first line) respectively gallery item of this gallery (third line to the end). The names at the second level are used for two purposes:</p>
+
+<ol>
+<li>The file name of the surface description file to load when this gallery item is clicked. The file extension <code>.jsurf</code> is added automatically.</li>
+<li>The file name of the prerendered icon for the gallery (item). Again, the file extension <code>.png</code> is added automatically.</li>
+</ol><p>The bookmarks are created by means of two LaTeX environments.</p>
+
+<h5>
+<a name="the-surferintropage-environment" class="anchor" href="#the-surferintropage-environment"><span class="octicon octicon-link"></span></a>The surferIntroPage environment</h5>
+
+<p>Syntax:</p>
+
+<pre><code>\begin{surferIntroPage}{Gallery label}{icon}{Page title}
+Text of the gallery introduction page
+\end{surferIntroPage}
+</code></pre>
+
+<p>This enviroment is used for the very first page in a gallery containing general information about the gallery. </p>
+
+<p>For <code>icon</code> use the name of a PNG file (omitting the file extension <code>.png</code>). Usually, you can just leave the icon untouched. It is better to use the same icon for all languages.</p>
+
+<h5>
+<a name="the-surferpage-environment" class="anchor" href="#the-surferpage-environment"><span class="octicon octicon-link"></span></a>The surferPage environment</h5>
+
+<p>Syntax:</p>
+
+<pre><code>\begin{surferPage}[Gallery item label]{Page title}
+Text of the gallery page
+\end{surferPage}
+</code></pre>
+
+<p>This environment is used for all but the very first page in a gallery to describe the surface associated with this gallery page. </p>
+
+<p>The optional <code>Gallery item label</code> is displayed in the gallery overview and may be omitted if the page title should be used as a label. Keep in mind that the label (resp. page title if label is omitted) should be concise since there is not much space to display it in the program.</p>
+
+<h4>
+<a name="adding-new-translations-via-github" class="anchor" href="#adding-new-translations-via-github"><span class="octicon octicon-link"></span></a>Adding new translations via GitHub</h4>
+
+<p>This is the recommended way of contributing in general. Sending endless emails is error prone and time consuming, but still possible. If you want to contribute via GitHub, here are some general rules:</p>
+
+<ol>
+<li>Fork the project to your account</li>
+<li>Create a new branch called <code>xxxxx-translation</code> where <code>xxxxx</code> is the human readable name of your language (e.g. <code>english</code> or <code>turkish</code>). </li>
+<li>Apply changes <em>only</em> to this branch. Changes to others brachnes <em>will not be merged</em> with the <code>master</code> branch.</li>
+<li>Once you have something ready to show, make a pull request for your branch and wait for our reply. </li>
+</ol><p>This is not the place to give an introduction to git, GitHub and its workflow. There are many tutorials in the web, but feel free to ask specific questions using our <a href="https://github.com/IMAGINARY/SURFER-Galleries/issues">issue tracker</a>.</p>
+
+<h3>
+<a name="improving-existing-translations" class="anchor" href="#improving-existing-translations"><span class="octicon octicon-link"></span></a>Improving existing translations</h3>
+
+<p>You found a typo? You think, a certain translation is wrong or ambigious? <a href="https://github.com/IMAGINARY/SURFER-Galleries/issues/new">Report the issue on GitHub</a> or <a href="http://http//www.imaginary.org/contact">contact us directly</a>.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>The gallery files and its sources are released under the <code>TODO</code> license. For details see the <code>LICENSE</code> file. By contributing to this project you automatically accepts that your contributions will be released under the same license terms.</p>
+
+<h2>
+<a name="authors" class="anchor" href="#authors"><span class="octicon octicon-link"></span></a>Authors</h2>
+
+<p>See the <code>AUTHORS</code> file.</p>
+        </section>
+
+        <footer>
+          SURFER: galleries is maintained by <a href="https://github.com/IMAGINARY">IMAGINARY</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
