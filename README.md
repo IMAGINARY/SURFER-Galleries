@@ -126,6 +126,17 @@ This environment is used for all but the very first page in a gallery to describ
 
 The optional `Gallery item label` is displayed in the gallery overview and may be omitted if the page title should be used as a label. Keep in mind that the label (resp. page title if label is omitted) should be concise since there is not much space to display it in the program.
 
+#### Adding new translations via GitHub
+
+This is the recommended way of contributing in general. Sending endless emails is error prone and time consuming, but still possible. If you want to contribute via GitHub, here are some general rules:
+
+1. Fork the project to your account
+2. Create a new branch called `xxxxx-translation` where `xxxxx` is the human readable name of your language (e.g. `english` or `turkish`). 
+3. Apply changes *only* to this branch. Changes to others brachnes *will not be merged* with the `master` branch.
+4. Once you have something ready to show, make a pull request for your branch and wait for our reply. 
+
+This is not the place to give an introduction to git, GitHub and its workflow. There are many tutorials in the web, but feel free to ask specific questions using our [issue tracker](https://github.com/IMAGINARY/SURFER-Galleries/issues).
+
 ### Improving existing translations
 
 You found a typo? You think, a certain translation is wrong or ambigious? [Report the issue on GitHub](https://github.com/IMAGINARY/SURFER-Galleries/issues/new) or [contact us directly](http://http//www.imaginary.org/contact).
