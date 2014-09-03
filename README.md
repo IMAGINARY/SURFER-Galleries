@@ -29,9 +29,40 @@ If you are on a Unix-like system you may also call the `compile_all.sh` bash scr
 Contributions
 -------------
 
+We encourage you to add translations for new languages and to improve existing ones. Note that by sending us your contributions you agree that they will be published under the license stated at the end of this file. 
+
 ### Adding a new translation
 
+First, look up your two-letter IETF BCP 47 language tag using [this search engine](http://rishida.net/utils/subtags/). 
+
+Assume you want to translate from English (`en`) to Turkish (`tr`). (Replace `en` and `tr` with the tags that fit your needs). Now, for each gallery (`fantasy`, `record`, `tutorial`), create a copy of the `en` subfolder and rename it to `tr`.
+
+Rename the main files of each galery to include the new language tag, e.g. rename
+```
+fantasy_en.tex  -> fantasy_tr.tex
+record_en.tex   -> record_tr.tex
+tutorial_en.tex -> tutorial_tr.tex
+```
+
+You have to edit these three files depending on the *type of language* you are translation from and to. Currently, every language supported by the `polyglossia` package should work as well as so called CJK languages (Chinese-Japanese-Korean). If your language is not in this list, please [report this issue](https://github.com/IMAGINARY/SURFER-Galleries/issues/new).
+
+ 1. non-CJK to non-CJK language: change the line `\setmainlanguage{...}` to reflect your language (see the [documentation](http://mirrors.ctan.org/macros/latex/contrib/polyglossia/polyglossia.pdf) of `polyglossia`)
+ 2. non-CJK to CJK language: change the document class from `SurferDesc` to `SurferDescCJK` and delete the `\setmainlanguage{...}` line
+ 3. CJK to CJK language: nothing to do 
+
+Now you are ready to translate the document. Please keep your document structure and LaTeX source (math/figures) as close as possible to the other translations. We usually use a visual diff and merge tool to have the original and the new translation side by side. Using e.g. [meld](http://meldmerge.org/) it looks like this:
+
+![Side-by-side editing using meld](https://raw.github.com/IMAGINARY/Arnold5to15/gh-pages/images/meld.png "Side-by-side editing using meld")
+
+Using the side-by-side editing also avoids many common erros, e.g. you will notice inline math you messed up by accident due to the highlighted changes.
+
+During the translation of the text from one language to another you should also consider to review a third translation as well since translations are usually not literal. Try to stay close to the German and English version although this may not always be possible. 
+
+Please also add your name(s) at the end of the `AUTHORS` file. 
+
 ### Improving existing translations
+
+You found a typo? You think, a certain translation is wrong or ambigious? [Report the issue on GitHub](https://github.com/IMAGINARY/SURFER-Galleries/issues/new) or [contact us directly](http://http//www.imaginary.org/contact).
 
 License
 -------
@@ -41,4 +72,4 @@ The gallery files and its sources are released under the `TODO` license. For det
 Authors
 -------
 
-See the ```AUTHORS``` file.
+See the `AUTHORS` file.
