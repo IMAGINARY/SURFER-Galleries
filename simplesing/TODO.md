@@ -50,8 +50,16 @@ A4pp_0.jpg
 A4pp_1.jpg
 A4pp_2.jpg
 
+For the A5 sings
+A5mm_0.jpg
+A5mm_1.jpg
+A5mm_2.jpg
+A5pm_0.jpg
+A5pm_1.jpg
+A5pm_2.jpg
 
-* There are two pages of A5 singularities, only in German, but these are not in the current version of surfer2008. Reconsider to include?
+
+* There are two pages of A5 singularities, only in German, but these are not in the current version of surfer2008. Reconsider to include? Actually, the text is the same as the intro.
 
 
 
