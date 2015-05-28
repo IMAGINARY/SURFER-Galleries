@@ -28,6 +28,7 @@
   ItalicFont=cmunsi,
   BoldItalicFont=cmunso
 ]{cmunss}
+\newfontfamily\hebrewfont[Script=Hebrew]{DejaVu Sans}
 
 % hyphenation support
 \RequirePackage{polyglossia}
@@ -141,8 +142,9 @@
 
 % scale up each page (required since LGPL JPedal PDF renderer only renders at 72dpi)
 \usepackage{blowup}
-\def\SurferDesc@pageScaleFactor{3}
-\blowUp{paper=x\SurferDesc@pageScaleFactor}
+%\def\SurferDesc@pageScaleFactor{3}
+\def\SurferDesc@pageScaleFactor{1}
+%\blowUp{paper=x\SurferDesc@pageScaleFactor}
 
 % adjust page geometry for 'surferIntroPage' environment (page layout changes must not be encapsulated in the group of 'surferIntroPage')
 \BeforeBeginEnvironment{surferIntroPage}{%
