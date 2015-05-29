@@ -142,9 +142,20 @@
 
 % scale up each page (required since LGPL JPedal PDF renderer only renders at 72dpi)
 \usepackage{blowup}
-%\def\SurferDesc@pageScaleFactor{3}
-\def\SurferDesc@pageScaleFactor{1}
-%\blowUp{paper=x\SurferDesc@pageScaleFactor}
+\def\SurferDesc@pageScaleFactor{3}
+\blowUp{paper=x\SurferDesc@pageScaleFactor}
+
+% fix page scaling when bidi package is loaded by polyglossia
+\let\old@BL@scalePage\BL@scalePage%
+\gdef\BL@scalePage{%
+  \providecommand\setRL{}%
+  \providecommand\setLR{}%
+  \providecommand\if@RTL{\ifnum0=0}
+  \if@RTL\gdef\restore@rtl@mode{\setRL}\else\gdef\restore@rtl@mode{}\fi%
+  \setLR%
+  \old@BL@scalePage%
+  \restore@rtl@mode%
+}
 
 % adjust page geometry for 'surferIntroPage' environment (page layout changes must not be encapsulated in the group of 'surferIntroPage')
 \BeforeBeginEnvironment{surferIntroPage}{%
