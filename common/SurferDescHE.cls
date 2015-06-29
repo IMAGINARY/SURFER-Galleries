@@ -29,7 +29,7 @@
   BoldItalicFont=cmunso
 ]{cmunss}
 \newfontfamily\hebrewfont[Script=Hebrew]{DejaVu Sans}
-\newfontfamily\arabicfont[Script=Arabic]{DejaVu Sans}
+\newfontfamily\arabicfont[Script=Arabic, AutoFakeSlant]{DejaVu Sans Condensed}
 % hyphenation support
 \RequirePackage{polyglossia}
 
