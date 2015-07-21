@@ -46,13 +46,17 @@ record_en.tex   -> record_tr.tex
 tutorial_en.tex -> tutorial_tr.tex
 ```
 
-You have to edit these three files depending on the *type of language* you are translation from and to. Currently, every language supported by the `polyglossia` package should work as well as so called CJK languages (Chinese-Japanese-Korean). If your language is not in this list, please [report this issue](https://github.com/IMAGINARY/SURFER-Galleries/issues/new).
+You have to edit these three files before starting your actual translation. The first line of each file reads something like
+```
+\documentclass[mainlanguage=english]{./../../common/SurferDesc}
+```
+where `english` has to be replaced by the name of the language you are translating to, here `turkish`. Hence, the new first line reads
+```
+\documentclass[mainlanguage=turkish]{./../../common/SurferDesc}
+```
+Support for each new language has to be built into the `common/SurferDesc.cls` file if it's not already present. Please [file an issue](https://github.com/IMAGINARY/SURFER-Galleries/issues/new) asking something like *Please add support for your_language*.
 
- 1. non-CJK to non-CJK language: change the line `\setmainlanguage{...}` to reflect your language (see the [documentation](http://mirrors.ctan.org/macros/latex/contrib/polyglossia/polyglossia.pdf) of `polyglossia`)
- 2. non-CJK to CJK language: change the document class from `SurferDesc` to `SurferDescCJK` and delete the `\setmainlanguage{...}` line
- 3. CJK to CJK language: nothing to do 
-
-Now you are ready to translate the galleries (all `.tex` files except the main file). Please keep your document structure and LaTeX source (math/figures) as close as possible to the other translations. We usually use a visual diff and merge tool to have the original and the new translation side by side. Using e.g. [meld](http://meldmerge.org/) it looks like this:
+Once this is done, you are ready to translate the galleries (all `.tex` files except the main file). Please keep your document structure and LaTeX source (math/figures) as close as possible to the other translations. We usually use a visual diff and merge tool to have the original and the new translation side by side. Using e.g. [meld](http://meldmerge.org/) it looks like this:
 
 ![Side-by-side editing using meld](https://raw.github.com/IMAGINARY/SURFER-Galleries/gh-pages/images/meld.png "Side-by-side editing using meld")
 
