@@ -39,7 +39,7 @@ First, look up your two-letter IETF BCP 47 language tag using [this search engin
 
 Assume you want to translate from English (`en`) to Turkish (`tr`). (Replace `en` and `tr` with the tags that fit your needs). Now, for each gallery (`fantasy`, `record`, `tutorial`), create a copy of the `en` subfolder and rename it to `tr`.
 
-Rename the main files of each galery to include the new language tag, e.g. rename
+Rename the main files of each gallery to include the new language tag, e.g. rename
 ```
 fantasy_en.tex  -> fantasy_tr.tex
 record_en.tex   -> record_tr.tex
