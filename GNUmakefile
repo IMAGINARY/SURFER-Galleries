@@ -1,4 +1,5 @@
 PACKAGE_NAME ?= surfer-galleries
+-include gnumaint.mk
 
 prefix = /usr/local
 datarootdir = $(prefix)/share
@@ -47,6 +48,7 @@ build: build-png build-pdf
 
 JARCHIVEHIERARCHY:=de/mfo/jsurfer
 jarbuild: build
+	$(MKDIR_P) $(JARDIR)
 	$(MKDIR_P) _SurferLocalization
 		$(eval _jarbn:=SurferData)
 		$(eval _wkd:=_SurferLocalization/$(jarbn))
@@ -117,7 +119,7 @@ jarclean:
 %_icon.png: %.jsurf
 	$(JSURF) --quality 3 --size 120 --output $@ $<
 
-JSURF ?= jsurf
+JSURF ?= /usr/bin/jsurf
 
 LATEXMK ?= /usr/bin/latexmk
 JAR ?= /usr/bin/jar
