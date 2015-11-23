@@ -12,6 +12,8 @@ LISTOF_GALLERY = \
 	record \
 	tutorial
 
+LISTOF_METADATAFILE = \
+	Gallery.properties
 
 LISTOF_LTXMFILE = \
 	$(foreach _gal, $(LISTOF_GALLERY), \
@@ -21,25 +23,42 @@ LISTOF_LTXMFILE = \
 LISTOF_FXPFILE = \
 	$(foreach _fxp, $(wildcard fxgui/??), $(_fxp)/MessagesBundle_$(notdir $(_fxp)).properties )
 
+LISTOF_JSURFSCRIPT = \
+	$(foreach _gal, $(LISTOF_GALLERY), \
+		$(wildcard $(_gal)/icon/$(_gal)_*.jsurf) \
+		)
+
+
 LISTOF_TLC = \
 	$(sort $(foreach _f, $(LISTOF_LTXMFILE) $(LISTOF_FXPFILE) , $(lastword $(subst /, ,$(dir $(_f)))) ))
 
-
 LISTOF_PDFFILE = $(patsubst %.tex,%.pdf,$(LISTOF_LTXMFILE))
+LISTOF_PNGICON = $(patsubst %.jsurf,%_icon.png,$(LISTOF_JSURFSCRIPT))
 
 LATEXMK_OPTIONS = -silent
 
 default:
 
-pdf: $(LISTOF_PDFFILE)
+build-png: $(LISTOF_PNGICON)
 
-build: pdf
+build-pdf: $(LISTOF_PDFFILE)
 
+build: build-png build-pdf
+
+JARCHIVEHIERARCHY:=de/mfo/jsurfer
 jarbuild: build
 	$(MKDIR_P) _SurferLocalization
+		$(eval _jarbn:=SurferData)
+		$(eval _wkd:=_SurferLocalization/$(jarbn))
+		$(eval _folder:=$(_wkd)/$(JARCHIVEHIERARCHY))
+		$(MKDIR_P) $(_folder)
+		$(MKDIR_P) $(_folder)/gallery
+		$(INSTALL_DATA) $(LISTOF_METADATAFILE) $(LISTOF_JSURFSCRIPT) $(LISTOF_PNGICON) $(_folder)/gallery
+		$(JAR) cf $(JARDIR)/$(_jarbn).jar -C $(_wkd) de
 	$(foreach _tlc,$(LISTOF_TLC), \
-		$(eval _wkd:=_SurferLocalization/SurferLocalization_$(_tlc)) \
-		$(eval _folder:=$(_wkd)/de/mfo/jsurfer) \
+		$(eval _jarbn:=SurferLocalization_$(_tlc)) \
+		$(eval _wkd:=_SurferLocalization/$(_jarbn)) \
+		$(eval _folder:=$(_wkd)/$(JARCHIVEHIERARCHY)) \
 		$(MKDIR_P) $(_folder) $(NEWLINE) \
 		$(MKDIR_P) $(_folder)/fxgui $(NEWLINE) \
 		$(MKDIR_P) $(_folder)/gallery $(NEWLINE) \
@@ -47,7 +66,7 @@ jarbuild: build
 			$(if $(_lfxp), $(INSTALL_DATA) $(_lfxp) $(_folder)/fxgui $(NEWLINE),) \
 		$(eval _lpdf:=$(filter %_$(_tlc).pdf ,$(LISTOF_PDFFILE))) \
 			$(if $(_lpdf), $(INSTALL_DATA) $(_lpdf) $(_folder)/gallery $(NEWLINE),) \
-		$(JAR) cf $(JARDIR)/SurferLocalization_$(_tlc).jar -C $(_wkd) de $(NEWLINE) \
+		$(JAR) cf $(JARDIR)/$(_jarbn).jar -C $(_wkd) de $(NEWLINE) \
 		)
 
 install: build
@@ -84,14 +103,21 @@ distclean:
 	$(RM_R) _SurferLocalization
 
 maintainer-clean: distclean
+	$(RM) $(LISTOF_PNGICON)
 
 jarclean:
+	$(RM) $(JARDIR)/SurferData.jar
 	$(foreach _tlc,$(LISTOF_TLC), \
 		$(RM) $(JARDIR)/SurferLocalization_$(_tlc).jar $(NEWLINE) \
 		)
 
 %.pdf: %.tex
 	$(LATEXMK) $(LATEXMK_OPTIONS) -cd -pdflatex="xelatex --shell-escape" -pdf $<
+
+%_icon.png: %.jsurf
+	$(JSURF) --quality 3 --size 120 --output $@ $<
+
+JSURF ?= jsurf
 
 LATEXMK ?= /usr/bin/latexmk
 JAR ?= /usr/bin/jar
@@ -106,3 +132,5 @@ define NEWLINE
 
 
 endef
+
+# eos
