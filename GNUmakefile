@@ -33,7 +33,7 @@ LISTOF_JSURFSCRIPT = \
 		)
 
 
-LISTOF_TLC = \
+LISTOF_TLLC = \
 	$(sort $(foreach _f, $(LISTOF_LTXMFILE) $(LISTOF_FXPFILE) , $(lastword $(subst /, ,$(dir $(_f)))) ))
 
 LISTOF_LTXPNG = $(patsubst %.jsurf,%.png,$(LISTOF_LTXJSSFILE))
@@ -65,16 +65,16 @@ jarbuild: build
 		$(MKDIR_P) $(_folder)/gallery
 		$(INSTALL_DATA) $(LISTOF_METADATAFILE) $(LISTOF_JSURFSCRIPT) $(LISTOF_PNGICON) $(_folder)/gallery
 		$(JAR) cf $(JARDIR)/$(_jarbn).jar -C $(_wkd) de
-	$(foreach _tlc,$(LISTOF_TLC), \
-		$(eval _jarbn:=SurferLocalization_$(_tlc)) \
+	$(foreach _tllc,$(LISTOF_TLLC), \
+		$(eval _jarbn:=SurferLocalization_$(_tllc)) \
 		$(eval _wkd:=_SurferLocalization/$(_jarbn)) \
 		$(eval _folder:=$(_wkd)/$(JARCHIVEHIERARCHY)) \
 		$(MKDIR_P) $(_folder) $(NEWLINE) \
 		$(MKDIR_P) $(_folder)/fxgui $(NEWLINE) \
 		$(MKDIR_P) $(_folder)/gallery $(NEWLINE) \
-		$(eval _lfxp:=$(filter %_$(_tlc).properties ,$(LISTOF_FXPFILE))) \
+		$(eval _lfxp:=$(filter %_$(_tllc).properties ,$(LISTOF_FXPFILE))) \
 			$(if $(_lfxp), $(INSTALL_DATA) $(_lfxp) $(_folder)/fxgui $(NEWLINE),) \
-		$(eval _lpdf:=$(filter %_$(_tlc).pdf ,$(LISTOF_PDFFILE))) \
+		$(eval _lpdf:=$(filter %_$(_tllc).pdf ,$(LISTOF_PDFFILE))) \
 			$(if $(_lpdf), $(INSTALL_DATA) $(_lpdf) $(_folder)/gallery $(NEWLINE),) \
 		$(JAR) cf $(JARDIR)/$(_jarbn).jar -C $(_wkd) de $(NEWLINE) \
 		)
@@ -118,8 +118,8 @@ maintainer-clean: distclean
 
 jarclean:
 	$(RM) $(JARDIR)/SurferData.jar
-	$(foreach _tlc,$(LISTOF_TLC), \
-		$(RM) $(JARDIR)/SurferLocalization_$(_tlc).jar $(NEWLINE) \
+	$(foreach _tllc,$(LISTOF_TLLC), \
+		$(RM) $(JARDIR)/SurferLocalization_$(_tllc).jar $(NEWLINE) \
 		)
 
 %.pdf: %.tex
