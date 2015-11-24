@@ -16,6 +16,9 @@ LISTOF_GALLERY = \
 LISTOF_METADATAFILE = \
 	Gallery.properties
 
+LISTOF_LTXJSSFILE = \
+	$(wildcard common/images/*.jsurf)
+
 LISTOF_LTXMFILE = \
 	$(foreach _gal, $(LISTOF_GALLERY), \
 		$(foreach _glf, $(wildcard $(_gal)/??), $(_glf)/$(_gal)_$(notdir $(_glf)).tex ) \
@@ -33,6 +36,7 @@ LISTOF_JSURFSCRIPT = \
 LISTOF_TLC = \
 	$(sort $(foreach _f, $(LISTOF_LTXMFILE) $(LISTOF_FXPFILE) , $(lastword $(subst /, ,$(dir $(_f)))) ))
 
+LISTOF_LTXPNG = $(patsubst %.jsurf,%.png,$(LISTOF_LTXJSSFILE))
 LISTOF_PDFFILE = $(patsubst %.tex,%.pdf,$(LISTOF_LTXMFILE))
 LISTOF_PNGICON = $(patsubst %.jsurf,%_icon.png,$(LISTOF_JSURFSCRIPT))
 
@@ -41,6 +45,10 @@ LATEXMK_OPTIONS = -silent
 default:
 
 build-png: $(LISTOF_PNGICON)
+
+build-pdf-images: $(LISTOF_LTXPNG)
+
+$(LISTOF_PDFFILE): build-pdf-images
 
 build-pdf: $(LISTOF_PDFFILE)
 
@@ -105,6 +113,7 @@ distclean:
 	$(RM_R) _SurferLocalization
 
 maintainer-clean: distclean
+	$(RM) $(LISTOF_LTXPNG)
 	$(RM) $(LISTOF_PNGICON)
 
 jarclean:
@@ -115,6 +124,9 @@ jarclean:
 
 %.pdf: %.tex
 	$(LATEXMK) $(LATEXMK_OPTIONS) -cd -pdflatex="xelatex --shell-escape" -pdf $<
+
+%.png: %.jsurf
+	$(JSURF) --quality 3 --size 600 --output $@ $<
 
 %_icon.png: %.jsurf
 	$(JSURF) --quality 3 --size 120 --output $@ $<
