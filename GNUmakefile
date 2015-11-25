@@ -40,6 +40,12 @@ LISTOF_LTXPNG = $(patsubst %.jsurf,%.png,$(LISTOF_LTXJSSFILE))
 LISTOF_PDFFILE = $(patsubst %.tex,%.pdf,$(LISTOF_LTXMFILE))
 LISTOF_PNGICON = $(patsubst %.jsurf,%_icon.png,$(LISTOF_JSURFSCRIPT))
 
+
+GALLERY_DATA_COMMON = \
+	$(LISTOF_METADATAFILE) \
+	$(LISTOF_JSURFSCRIPT) \
+	$(LISTOF_PNGICON)
+
 LATEXMK_OPTIONS = -silent
 
 default:
@@ -63,7 +69,7 @@ jarbuild: build
 		$(eval _folder:=$(_wkd)/$(JARCHIVEHIERARCHY))
 		$(MKDIR_P) $(_folder)
 		$(MKDIR_P) $(_folder)/gallery
-		$(INSTALL_DATA) $(LISTOF_METADATAFILE) $(LISTOF_JSURFSCRIPT) $(LISTOF_PNGICON) $(_folder)/gallery
+		$(INSTALL_DATA) $(GALLERY_DATA_COMMON) $(_folder)/gallery
 		$(JAR) cf $(JARDIR)/$(_jarbn).jar -C $(_wkd) de
 	$(foreach _tllc,$(LISTOF_TLLC), \
 		$(eval _jarbn:=SurferLocalization_$(_tllc)) \
@@ -83,24 +89,14 @@ install: build
 	$(MKDIR_P) $(DESTDIR)$(pkgdatadir)
 	$(MKDIR_P) $(DESTDIR)$(pkgdatadir)/fxgui
 	$(MKDIR_P) $(DESTDIR)$(pkgdatadir)/gallery
-	$(foreach _pdf,$(LISTOF_PDFFILE), \
-		$(INSTALL_DATA) $(_pdf) $(DESTDIR)$(pkgdatadir)/gallery/$(notdir $(_pdf)) \
-		$(NEWLINE) \
-		)
-	$(foreach _fxp,$(LISTOF_FXPFILE), \
-		$(INSTALL_DATA) $(_fxp) $(DESTDIR)$(pkgdatadir)/fxgui/$(notdir $(_fxp)) \
-		$(NEWLINE) \
-		)
+	$(INSTALL_DATA) $(GALLERY_DATA_COMMON) $(DESTDIR)$(pkgdatadir)/gallery
+	$(INSTALL_DATA) $(LISTOF_FXPFILE)      $(DESTDIR)$(pkgdatadir)/fxgui
+	$(INSTALL_DATA) $(LISTOF_PDFFILE)      $(DESTDIR)$(pkgdatadir)/gallery
 
 uninstall:
-	$(foreach _fxp,$(LISTOF_FXPFILE), \
-		$(RM) $(DESTDIR)$(pkgdatadir)/fxgui/$(notdir $(_fxp)) \
-		$(NEWLINE) \
-		)
-	$(foreach _pdf,$(LISTOF_PDFFILE), \
-		$(RM) $(DESTDIR)$(pkgdatadir)/gallery/$(notdir $(_pdf)) \
-		$(NEWLINE) \
-		)
+	cd $(DESTDIR)$(pkgdatadir)/gallery && $(RM) $(notdir $(LISTOF_PDFFILE))
+	cd $(DESTDIR)$(pkgdatadir)/fxgui   && $(RM) $(notdir $(LISTOF_FXPFILE))
+	cd $(DESTDIR)$(pkgdatadir)/gallery && $(RM) $(notdir $(GALLERY_DATA_COMMON))
 	@test ! -d $(DESTDIR)$(pkgdatadir)/gallery || $(RMDIR) $(DESTDIR)$(pkgdatadir)/gallery
 	@test ! -d $(DESTDIR)$(pkgdatadir)/fxgui || $(RMDIR) $(DESTDIR)$(pkgdatadir)/fxgui
 	@test ! -d $(DESTDIR)$(pkgdatadir) || $(RMDIR) $(DESTDIR)$(pkgdatadir)
@@ -117,10 +113,7 @@ maintainer-clean: distclean
 	$(RM) $(LISTOF_PNGICON)
 
 jarclean:
-	$(RM) $(JARDIR)/SurferData.jar
-	$(foreach _tllc,$(LISTOF_TLLC), \
-		$(RM) $(JARDIR)/SurferLocalization_$(_tllc).jar $(NEWLINE) \
-		)
+	cd $(JARDIR) && $(RM) $(addsuffix .jar, SurferData $(addprefix SurferLocalization_,$(LISTOF_TLLC)))
 
 %.pdf: %.tex
 	$(LATEXMK) $(LATEXMK_OPTIONS) -cd -pdflatex="xelatex --shell-escape" -pdf $<
