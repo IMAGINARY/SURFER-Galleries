@@ -29,13 +29,13 @@ If you are on a Unix-like system you may also call the `compile_all.sh` bash scr
 Contributions
 -------------
 
-We encourage you to add translations for new languages and to improve existing ones. Note that by sending us your contributions you agree that they will be published under the license stated at the end of this file. 
+We encourage you to add translations for new languages and to improve existing ones. Note that by sending us your contributions you agree that they will be published under the license stated at the end of this file.
 
 Please read the entire guide before starting any action.
 
 ### Adding a new translation
 
-First, look up your two-letter IETF BCP 47 language tag using [this search engine](http://rishida.net/utils/subtags/). 
+First, look up your two-letter IETF BCP 47 language tag using [this search engine](http://rishida.net/utils/subtags/).
 
 Assume you want to translate from English (`en`) to Turkish (`tr`). (Replace `en` and `tr` with the tags that fit your needs). Now, for each gallery (`fantasy`, `record`, `tutorial`), create a copy of the `en` subfolder and rename it to `tr`.
 
@@ -64,7 +64,7 @@ Using the side-by-side editing also avoids many common erros, e.g. you will noti
 
 During the translation of the text from one language to another you should also consider to review a third translation as well since translations are usually not literal. Try to stay close to the German and English version although this may not always be possible.
 
-Please also add your name(s) at the end of the `AUTHORS` file. 
+Please also add your name(s) at the end of the `AUTHORS` file.
 
 #### Structure of the galleries
 
@@ -113,7 +113,7 @@ Syntax:
 Text of the gallery introduction page
 \end{surferIntroPage}
 ```
-This enviroment is used for the very first page in a gallery containing general information about the gallery. 
+This enviroment is used for the very first page in a gallery containing general information about the gallery.
 
 For `icon` use the name of a PNG file (omitting the file extension `.png`). Usually, you can just leave the icon untouched. It is better to use the same icon for all languages.
 
@@ -126,7 +126,7 @@ Text of the gallery page
 \end{surferPage}
 ```
 
-This environment is used for all but the very first page in a gallery to describe the surface associated with this gallery page. 
+This environment is used for all but the very first page in a gallery to describe the surface associated with this gallery page.
 
 The optional `Gallery item label` is displayed in the gallery overview and may be omitted if the page title should be used as a label. Keep in mind that the label (resp. page title if label is omitted) should be concise since there is not much space to display it in the program.
 
@@ -135,9 +135,9 @@ The optional `Gallery item label` is displayed in the gallery overview and may b
 This is the recommended way of contributing in general. Sending endless emails is error prone and time consuming, but still possible. If you want to contribute via GitHub, here are some general rules:
 
 1. Fork the project to your account
-2. Create a new branch called `xxxxx-translation` where `xxxxx` is the human readable name of your language (e.g. `english` or `turkish`). 
+2. Create a new branch called `xxxxx-translation` where `xxxxx` is the human readable name of your language (e.g. `english` or `turkish`).
 3. Apply changes *only* to this branch. Changes to others brachnes *will not be merged* with the `master` branch.
-4. Once you have something ready to show, make a pull request for your branch and wait for our reply. 
+4. Once you have something ready to show, make a pull request for your branch and wait for our reply.
 
 This is not the place to give an introduction to git, GitHub and its workflow. There are many tutorials in the web, but feel free to ask specific questions using our [issue tracker](https://github.com/IMAGINARY/SURFER-Galleries/issues).
 
@@ -148,7 +148,9 @@ You found a typo? You think, a certain translation is wrong or ambigious? [Repor
 License
 -------
 
-The gallery files and its sources are released under the `TODO` license. For details see the `LICENSE` file. By contributing to this project you automatically accepts that your contributions will be released under the same license terms.
+[![Creative Commons Attribution 4.0 International Public License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
+
+The gallery files and its sources are released under the Creative Commons Attribution 4.0 International Public License. For details see the `LICENSE` file. By contributing to this project you automatically accepts that your contributions will be released under the same license terms.
 
 Authors
 -------
