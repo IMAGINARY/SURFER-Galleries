@@ -1,5 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{SurferDesc}[2014/03/13 Class for Surfer description files]
+\ProvidesClass{SurferDesc}[2015/12/11 Class for Surfer description files]
+\def\SurferDesc@version{0.15.0}
+
 \RequirePackage{xkeyval}
 
 \newif\if@SurferDesc@LatinCyrillic\@SurferDesc@LatinCyrillicfalse
@@ -151,6 +153,8 @@
 \RequirePackage{graphicx}
 \RequirePackage[bookmarksopen=true]{hyperref}
 \RequirePackage{csquotes}
+
+\hypersetup{pdfcreator={LaTeX2e with package SurferDesc (version \SurferDesc@version)}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Language selection
