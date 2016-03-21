@@ -1,4 +1,5 @@
 PACKAGE_NAME ?= surfer-alggeo-galleries
+PACKAGE_VERSION ?= $(shell sed -n -e 's|\\def\\SurferDesc@version{\([0-9\.]*\)}|\1|p' common/SurferDesc.cls)
 -include maint.mk
 
 prefix = /usr
@@ -140,6 +141,8 @@ define NEWLINE
 endef
 
 default-info:
-	@echo LISTOF_TLLC: $(LISTOF_TLLC)
+	@echo PACKAGE_NAME:    $(PACKAGE_NAME)
+	@echo PACKAGE_VERSION: $(PACKAGE_VERSION)
+	@echo LISTOF_TLLC:     $(LISTOF_TLLC)
 
 # eos
