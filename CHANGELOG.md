@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 
 ### Added
+- Croatian translation
 - Creative Commons Attribution 4.0 International Public License
 - list of AUTHORS
 - support for EditorConfig to unify coding style
