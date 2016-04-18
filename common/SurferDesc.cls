@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{SurferDesc}[2015/12/11 Class for Surfer description files]
-\def\SurferDesc@version{0.15.0}
+\ProvidesClass{SurferDesc}[2016/04/18 Class for Surfer description files]
+\def\SurferDesc@version{0.16.0}
 
 \RequirePackage{xkeyval}
 
@@ -8,7 +8,7 @@
 \global\newif\if@SurferDesc@CJK\@SurferDesc@CJKfalse
 \newif\if@SurferDesc@HebrewArabic\@SurferDesc@HebrewArabicfalse
 
-\define@choicekey*+{SurferDesc.cls}{mainlanguage}[\val\nr]{arabic,chinese,traditional-chinese,dutch,english,french,german,hebrew,korean,norwegian,portuges,russian,serbian,spanish,turkish}[english]{%
+\define@choicekey*+{SurferDesc.cls}{mainlanguage}[\val\nr]{arabic,chinese,traditional-chinese,croatian,dutch,english,french,german,hebrew,korean,norwegian,portuges,russian,serbian,spanish,turkish}[english]{%
     \global\edef\SurferDesc@mainlanguage{\val}
     \ifcase\nr
         % arabic
@@ -19,6 +19,9 @@
     \or
         % traditional-chinese
         \global\@SurferDesc@CJKtrue
+    \or
+        % croatian
+        \global\@SurferDesc@LatinCyrillictrue
     \or
     	% dutch
         \global\@SurferDesc@LatinCyrillictrue
