@@ -2,74 +2,6 @@
 \ProvidesClass{SurferDesc}[2015/12/11 Class for Surfer description files]
 \def\SurferDesc@version{0.15.0}
 
-\RequirePackage{xkeyval}
-
-\newif\if@SurferDesc@LatinCyrillic\@SurferDesc@LatinCyrillicfalse
-\global\newif\if@SurferDesc@CJK\@SurferDesc@CJKfalse
-\newif\if@SurferDesc@HebrewArabic\@SurferDesc@HebrewArabicfalse
-
-\define@choicekey*+{SurferDesc.cls}{mainlanguage}[\val\nr]{arabic,chinese,traditional-chinese,dutch,english,french,german,hebrew,korean,norwegian,portuges,russian,serbian,spanish,turkish}[english]{%
-    \global\edef\SurferDesc@mainlanguage{\val}
-    \ifcase\nr
-        % arabic
-        \global\@SurferDesc@HebrewArabictrue
-    \or
-        % chinese
-        \global\@SurferDesc@CJKtrue
-    \or
-        % traditional-chinese
-        \global\@SurferDesc@CJKtrue
-    \or
-    	% dutch
-        \global\@SurferDesc@LatinCyrillictrue
-    \or
-    	% english
-        \global\@SurferDesc@LatinCyrillictrue
-    \or
-    	% french
-        \global\@SurferDesc@LatinCyrillictrue
-    \or
-    	% german
-        \global\@SurferDesc@LatinCyrillictrue
-    \or
-    	% hebrew
-        \global\@SurferDesc@HebrewArabictrue
-    \or
-    	% korean
-        \global\@SurferDesc@CJKtrue
-    \or
-    	% norwegian
-        \global\@SurferDesc@LatinCyrillictrue
-        \global\edef\SurferDesc@mainlanguage{norsk}
-    \or
-    	% portuguese
-        \global\@SurferDesc@LatinCyrillictrue
-    \or
-    	% russian
-        \global\@SurferDesc@LatinCyrillictrue
-    \or
-    	% serbian
-        \global\@SurferDesc@LatinCyrillictrue
-    \or
-    	% spanish
-        \global\@SurferDesc@LatinCyrillictrue
-    \or
-        % turkish
-        \global\@SurferDesc@LatinCyrillictrue
-    \fi
-}{%
-    \ClassError{SurferDesc.cls}{Erroneuos value '\val' for option key 'mainlanguage'}{Set 'mainlanguage' to either arabic, chinese, dutch, english, french, german, hebrew, korean, norwegian, portuges, russian, serbian, spanish or turkish}
-}
-\DeclareOptionX*{\ClassWarning{SurferDesc}{Unknown option '\CurrentOption'}}
-\ProcessOptionsX<SurferDesc.cls>
-
-% ensure default value of mainlanguage is set to english
-\ifdefined\SurferDesc@mainlanguage
-\else
-    \global\edef\SurferDesc@mainlanguage{english}
-    \global\@SurferDesc@LatinCyrillictrue
-\fi
-
 % base this documentclass on AMS article
 \LoadClass[8pt]{amsart}
 
@@ -85,32 +17,30 @@
 \RequirePackage{sfmath}
 
 \RequirePackage[no-math]{fontspec}
-\if@SurferDesc@CJK
-    % support for Chinese-Japanese-Korean script
-    \usepackage[space]{xeCJK}
-    \IfFileExists{wqy-zenhei.ttc}%
-      {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{wqy-zenhei.ttc}}
-      {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{WenQuanYi Zen Hei}}
-\else
-    % load Computer Modern Unicode Sans Serif fonts
-    \defaultfontfeatures{Mapping=tex-text}
-    \setmainfont[
-      Ligatures=TeX,
-      Extension=.otf,
-      SlantedFont=cmunsi,
-      BoldFont=cmunsx,
-      ItalicFont=cmunsi,
-      BoldItalicFont=cmunso
-    ]{cmunss}
-    \if@SurferDesc@HebrewArabic
-        % load DejaVu Sans for hebrew and arabic
-        \newfontfamily\hebrewfont[Script=Hebrew]{DejaVu Sans}
-        \newfontfamily\arabicfont[Script=Arabic, AutoFakeSlant]{DejaVu Sans Condensed}
-    \fi
 
-    % hyphenation support
-    \RequirePackage{polyglossia}
-\fi
+% support for Chinese-Japanese-Korean script
+\usepackage[space]{xeCJK}
+\IfFileExists{wqy-zenhei.ttc}%
+  {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{wqy-zenhei.ttc}}
+  {\setCJKsansfont[Ligatures=TeX,AutoFakeBold=3.25,AutoFakeSlant]{WenQuanYi Zen Hei}}
+
+% load Computer Modern Unicode Sans Serif fonts
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[
+  Ligatures=TeX,
+  Extension=.otf,
+  SlantedFont=cmunsi,
+  BoldFont=cmunsx,
+  ItalicFont=cmunsi,
+  BoldItalicFont=cmunso
+]{cmunss}
+
+% load DejaVu Sans for hebrew and arabic
+\newfontfamily\hebrewfont[Script=Hebrew]{DejaVu Sans}
+\newfontfamily\arabicfont[Script=Arabic, AutoFakeSlant]{DejaVu Sans Condensed}
+
+% hyphenation support
+\RequirePackage{polyglossia}
 
 % subliminal refinements towards typographical perfection
 \RequirePackage{microtype}
@@ -151,7 +81,8 @@
 
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
-\RequirePackage[bookmarksopen=true]{hyperref}
+\RequirePackage{hyperref}
+\RequirePackage[open]{bookmark}
 \RequirePackage{csquotes}
 
 \hypersetup{pdfcreator={LaTeX2e with package SurferDesc (version \SurferDesc@version)}}
@@ -160,16 +91,36 @@
 % Language selection
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\if@SurferDesc@CJK
-    \relax
-\else
-    \ifx\SurferDesc@mainlanguage english
-        \setmainlanguage{english}
-    \else
-        \expandafter\setmainlanguage\expandafter{\SurferDesc@mainlanguage}
-        \setotherlanguage{english}
-    \fi
-\fi
+\setmainlanguage{english}
+\setotherlanguages{arabic,dutch,english,french,german,hebrew,norwegian,portuges,russian,serbian,spanish,turkish}
+
+\RequirePackage{ifthen}
+
+\newcommand{\setgallerylanguage}[2]{%
+    \clearpage%
+    \global\def\@SurferDesc@language{#1}%
+    \global\def\@SurferDesc@languagecode{#2}%
+    \makexeCJKinactive
+    \ifthenelse{\equal{#1}{korean}\or\equal{#1}{chinese}\or\equal{#1}{traditional-chinese}}{%
+        \selectlanguage{english}%
+        \makexeCJKactive
+    }{%
+        \selectlanguage{#1}%
+    }%
+    \bookmark[level=0,page=\thepage]{#2}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Importing galleries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{import}
+
+\newcommand{\includegallery}[1]{%
+    \clearpage%
+    \bookmark[level=1,page=\thepage]{#1}%
+    \subimport{#1/\@SurferDesc@languagecode/}{#1\string_\@SurferDesc@languagecode}%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Environments for the SURFER gallery pages
@@ -180,7 +131,7 @@
 \RequirePackage{currfile}
 
 % patch some macros to allow underscores as part of arguments
-\newcommand{\UnderscoreCommands}{\do\currentpdfbookmark \do\belowpdfbookmark}
+\newcommand{\UnderscoreCommands}{\do\subimport}
 \RequirePackage[strings]{underscore}
 
 % enhanced declaration of new commands and environment
@@ -194,10 +145,11 @@
 \definecolor{textFgColor}{rgb}{0.15,0.15,0.1}
 
 % writing direction aware flush environment
-\newenvironment{SurferDescFlush}{\begin{flushleft}}{\end{flushleft}}
-\if@SurferDesc@HebrewArabic
-    \renewenvironment{SurferDescFlush}{\begin{flushright}}{\end{flushright}}
-\fi
+\newenvironment{SurferDescFlush}{%
+    \iflanguage{arabic}{\begin{flushright}}{\iflanguage{hebrew}{\begin{flushright}}{\begin{flushleft}}}%
+}{%
+    \iflanguage{arabic}{\end{flushright}}{\iflanguage{hebrew}{\end{flushright}}{\end{flushleft}}}%
+}
 
 % introduction page for a gallery; arguments:
 %  #1 title of the gallery (mandatory)
@@ -213,8 +165,8 @@
   %%%%%
   \begin{SurferDescFlush}%
   {%
-    \currentpdfbookmark{#1}{\currfilebase}
-    \belowpdfbookmark{#2}{\currfilebase.fileprefix}
+    \bookmark[level=2,page=\thepage]{#1}
+    \bookmark[level=3,page=\thepage]{#2}
     \bfseries\boldmath #3
   }\par%
   }%
@@ -234,21 +186,21 @@
   %%%%%
   \begin{SurferDescFlush}%
   {%
-    \currentpdfbookmark{\IfValueTF{#1}{#1}{\surferPage@title}}{\currfilebase}
-    \belowpdfbookmark{\currfilebase}{\currfilebase.fileprefix}
+    \bookmark[level=2,page=\thepage]{\IfValueTF{#1}{#1}{\surferPage@title}}
+    \bookmark[level=3,page=\thepage]{\currfilebase}
     \bfseries\boldmath #2
   }\par%
   }%
 {\end{SurferDescFlush}}
 
 % scale up each page (required since LGPL JPedal PDF renderer only renders at 72dpi)
-\usepackage{blowup}
-\def\SurferDesc@pageScaleFactor{3}
-\blowUp{paper=x\SurferDesc@pageScaleFactor}
+%\usepackage{blowup}
+\def\SurferDesc@pageScaleFactor{1}
+%\blowUp{paper=x\SurferDesc@pageScaleFactor}
 
 % fix page scaling when bidi package is loaded by polyglossia
 \newcommand{\@SurferDesc@restore@rtl@mode}{\if@RTL\gdef\restore@rtl@mode{\setRL}\else\gdef\restore@rtl@mode{}\fi}%
-\if@SurferDesc@HebrewArabic{%
+%\if@SurferDesc@HebrewArabic{%
     \@ifpackageloaded{bidi}{
         \global\let\old@BL@scalePage\BL@scalePage
         \gdef\BL@scalePage{%
@@ -258,7 +210,7 @@
             \restore@rtl@mode%
         }
     }{}%
-}\fi
+%}\fi
 
 % adjust page geometry for 'surferIntroPage' environment (page layout changes must not be encapsulated in the group of 'surferIntroPage')
 \BeforeBeginEnvironment{surferIntroPage}{%
