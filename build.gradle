@@ -1,0 +1,42 @@
+plugins {
+    id "com.jfrog.bintray" version "1.7"
+}
+apply plugin: 'java'
+
+group = 'de.mfo.surfer.gallery'
+version = '2.0.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}
+
+task pdf(type: Exec) {
+    ext.srcFile = file('Surfer-Galleries.tex')
+    inputs.files fileTree(dir: '.').matching {
+        include 'SurferDesc.cls'
+        include '**/*.tex'
+        include 'images/**/*'
+    }
+    outputs.file new File( buildDir, 'resources/main/de/mfo/surfer/gallery/Surfer-Galleries.pdf' )
+    workingDir '.'
+    standardOutput = new ByteArrayOutputStream() // stops output to STDOUT
+
+    doFirst {
+        getTemporaryDir().mkdirs()
+    }
+
+    2.times {
+        commandLine 'xelatex', "-output-directory=${getTemporaryDir()}", 'Surfer-Galleries.tex'
+    }
+
+    doLast {
+        copy {
+            from("${getTemporaryDir()}") {
+                include 'Surfer-Galleries.pdf'
+            }
+            into "${buildDir}/resources/main/de/mfo/surfer/gallery"
+        }
+    }
+}
+
+jar.dependsOn pdf
