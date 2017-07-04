@@ -2,8 +2,10 @@ plugins {
     id "com.jfrog.bintray" version "1.7"
 }
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
-group = 'de.mfo.surfer.gallery'
+group = 'de.mfo.surfer'
 version = '2.0.0-SNAPSHOT'
 
 task wrapper(type: Wrapper) {
@@ -40,3 +42,67 @@ task pdf(type: Exec) {
 }
 
 jar.dependsOn pdf
+
+artifacts {
+    archives jar
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId 'de.mfo.surfer'
+            artifactId 'surfer-galleries'
+            version project.version
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintray.user') ? project.property('bintray.user') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintray.apiKey') ? project.property('bintray.apiKey') : System.getenv('BINTRAY_API_KEY')
+
+    publications = ['MyPublication'] //When uploading Maven-based publication files
+
+    dryRun = true //[Default: false] Whether to run this as dry-run, without deploying
+    publish = false //[Default: false] Whether version should be auto published after an upload
+    override = false //[Default: false] Whether to override version artifacts already published
+    //Package configuration. The plugin will use the repo and name properties to check if the package already exists. In that case, there's no need to configure the other package properties (like userOrg, desc, etc).
+    pkg {
+        repo = 'de.mfo.surfer'
+        name = 'surfer-galleries'
+        userOrg = 'imaginary' //An optional organization name when the repo belongs to one of the user's orgs
+        desc = 'what a fantastic package indeed!'
+        websiteUrl = 'https://github.com/IMAGINARY/SURFER-Galleries'
+        issueTrackerUrl = 'https://github.com/IMAGINARY/SURFER-Galleries/issues'
+        vcsUrl = 'https://github.com/IMAGINARY/SURFER-Galleries.git'
+        licenses = ['Apache-2.0']
+//        labels = ['gear', 'gore', 'gorilla']
+        publicDownloadNumbers = true
+//        attributes= ['a': ['ay1', 'ay2'], 'b': ['bee'], c: 'cee'] //Optional package-level attributes
+
+        githubRepo = 'IMAGINARY/SURFER-Galleries' //Optional Github repository
+        githubReleaseNotesFile = 'CHANGELOG.md' //Optional Github readme file
+
+        //Optional version descriptor
+        version {
+//            name = '1.3-Final' //Bintray logical version name
+//            desc = //Optional - Version-specific description'
+            released = new java.util.Date()//Optional - Date of the version release. 2 possible values: date in the format of 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ' OR a java.util.Date instance
+            vcsTag = "v${project.version}"
+//            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin'] //Optional version-level attributes
+            //Optional configuration for GPG signing
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = 'passphrase' //Optional. The passphrase for GPG signing'
+            }
+            //Optional configuration for Maven Central sync of the version
+            mavenCentralSync {
+                sync = true //[Default: true] Determines whether to sync the version to Maven Central.
+                user = 'userToken' //OSS user token: mandatory
+                password = 'paasword' //OSS user password: mandatory
+                close = '1' //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+            }
+        }
+    }
+}
