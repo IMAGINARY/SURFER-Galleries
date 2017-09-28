@@ -8,7 +8,7 @@
 \global\newif\if@SurferDesc@CJK\@SurferDesc@CJKfalse
 \newif\if@SurferDesc@HebrewArabic\@SurferDesc@HebrewArabicfalse
 
-\define@choicekey*+{SurferDesc.cls}{mainlanguage}[\val\nr]{arabic,chinese,traditional-chinese,dutch,english,french,german,hebrew,korean,norwegian,portuges,russian,serbian,spanish,turkish}[english]{%
+\define@choicekey*+{SurferDesc.cls}{mainlanguage}[\val\nr]{arabic,chinese,traditional-chinese,dutch,english,french,german,hebrew,korean,norwegian,portuges,romanian,russian,serbian,spanish,turkish}[english]{%
     \global\edef\SurferDesc@mainlanguage{\val}
     \ifcase\nr
         % arabic
@@ -43,6 +43,9 @@
         \global\edef\SurferDesc@mainlanguage{norsk}
     \or
     	% portuguese
+        \global\@SurferDesc@LatinCyrillictrue
+    \or
+    	% romanian
         \global\@SurferDesc@LatinCyrillictrue
     \or
     	% russian
@@ -153,6 +156,11 @@
 \RequirePackage{graphicx}
 \RequirePackage[bookmarksopen=true]{hyperref}
 \RequirePackage{csquotes}
+\DeclareQuoteStyle{romanian}% verified
+  {\quotedblbase}
+  {\textquotedblright}
+  {\guillemotleft}
+  {\guillemotright}
 
 \hypersetup{pdfcreator={LaTeX2e with package SurferDesc (version \SurferDesc@version)}}
 
