@@ -11,3 +11,8 @@
 *.synctex
 
 *.pdf
+
+_SurferLocalization
+*_icon.png
+
+gnumaint.mk
