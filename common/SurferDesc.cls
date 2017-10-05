@@ -8,7 +8,7 @@
 \global\newif\if@SurferDesc@CJK\@SurferDesc@CJKfalse
 \newif\if@SurferDesc@HebrewArabic\@SurferDesc@HebrewArabicfalse
 
-\define@choicekey*+{SurferDesc.cls}{mainlanguage}[\val\nr]{arabic,chinese,traditional-chinese,dutch,english,french,german,hebrew,korean,norwegian,portuges,romanian,russian,serbian,spanish,turkish}[english]{%
+\define@choicekey*+{SurferDesc.cls}{mainlanguage}[\val\nr]{arabic,chinese,traditional-chinese,dutch,english,french,german,hebrew,italian,korean,norwegian,portuges,romanian,russian,serbian,spanish,turkish}[english]{%
     \global\edef\SurferDesc@mainlanguage{\val}
     \ifcase\nr
         % arabic
@@ -34,6 +34,9 @@
     \or
     	% hebrew
         \global\@SurferDesc@HebrewArabictrue
+    \or
+    	% italian
+        \global\@SurferDesc@LatinCyrillictrue
     \or
     	% korean
         \global\@SurferDesc@CJKtrue
