@@ -105,7 +105,8 @@
         \selectlanguage{english}%
         \makexeCJKactive
     }{%
-        \selectlanguage{#1}%
+        // workaround for polyglossia bug with 'german' language
+        \ifthenelse{\equal{#1}{german}}{\selectlanguage{ngerman}}{\selectlanguage{#1}}%
     }%
     \bookmark[level=0,page=\thepage]{#2}%
 }

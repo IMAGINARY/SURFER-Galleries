@@ -1,0 +1,115 @@
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+    id "java"
+    id "maven"
+    id "maven-publish"
+}
+
+group = 'de.mfo.surfer'
+version = '0.17.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+    // always keep gradle version in Dockerfile in sync
+    gradleVersion = '2.12'
+}
+
+task pdf(type: Exec) {
+    ext.srcFile = file('Surfer-Galleries.tex')
+    inputs.files fileTree(dir: '.').matching {
+        include 'SurferDesc.cls'
+        include '**/*.tex'
+        include 'images/**/*'
+    }
+    outputs.file new File( buildDir, 'resources/main/de/mfo/surfer/gallery/Surfer-Galleries.pdf' )
+    workingDir '.'
+    standardOutput = new ByteArrayOutputStream() // stops output to STDOUT
+
+    doFirst {
+        getTemporaryDir().mkdirs()
+    }
+
+    2.times {
+        commandLine 'xelatex', "-output-directory=${getTemporaryDir()}", 'Surfer-Galleries.tex'
+    }
+
+    doLast {
+        copy {
+            from("${getTemporaryDir()}") {
+                include 'Surfer-Galleries.pdf'
+            }
+            into "${buildDir}/resources/main/de/mfo/surfer/gallery"
+        }
+    }
+}
+
+jar.dependsOn pdf
+
+artifacts {
+    archives jar
+}
+
+publishing {
+    publications {
+        mavenPdf(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId project.name
+            version project.version
+        }
+    }
+    repositories {
+            maven {
+                // define in local gradle.properties file
+                url (System.getenv('MAVEN_REPOSITORY_URL')!=null) ? System.getEnv('MAVEN_REPOSITORY_URL') : project.property( 'publishing.repositories.maven.url' )
+            }
+    }
+}
+
+bintray {
+    user = ( System.getenv('BINTRAY_USER') != null ) ? System.getenv('BINTRAY_USER') : ( project.hasProperty('bintray.user') ? project.property('bintray.user') : '' )
+    key = ( System.getenv('BINTRAY_API_KEY') != null ) ? System.getenv('BINTRAY_API_KEY') : ( project.hasProperty('bintray.apiKey') ? project.property('bintray.apiKey') : '' )
+
+    publications = ['mavenPdf'] //When uploading Maven-based publication files
+
+    dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
+    publish = false //[Default: false] Whether version should be auto published after an upload
+    override = true //[Default: false] Whether to override version artifacts already published
+    //Package configuration. The plugin will use the repo and name properties to check if the package already exists. In that case, there's no need to configure the other package properties (like userOrg, desc, etc).
+    pkg {
+        repo = 'de.mfo.surfer'
+        name = 'surfer-galleries'
+        userOrg = 'imaginary' //An optional organization name when the repo belongs to one of the user's orgs
+        desc = 'what a fantastic package indeed!'
+        websiteUrl = 'https://github.com/IMAGINARY/SURFER-Galleries'
+        issueTrackerUrl = 'https://github.com/IMAGINARY/SURFER-Galleries/issues'
+        vcsUrl = 'https://github.com/IMAGINARY/SURFER-Galleries.git'
+        licenses = ['Apache-2.0']
+//        labels = ['gear', 'gore', 'gorilla']
+        publicDownloadNumbers = true
+//        attributes= ['a': ['ay1', 'ay2'], 'b': ['bee'], c: 'cee'] //Optional package-level attributes
+
+        githubRepo = 'IMAGINARY/SURFER-Galleries' //Optional Github repository
+        githubReleaseNotesFile = 'CHANGELOG.md' //Optional Github readme file
+
+        //Optional version descriptor
+        version {
+//            name = '1.3-Final' //Bintray logical version name
+//            desc = //Optional - Version-specific description'
+            released = new java.util.Date()//Optional - Date of the version release. 2 possible values: date in the format of 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ' OR a java.util.Date instance
+            vcsTag = "v${project.version}"
+//            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin'] //Optional version-level attributes
+            //Optional configuration for GPG signing
+            gpg {
+                sign = false //Determines whether to GPG sign the files. The default is false
+                passphrase = 'passphrase' //Optional. The passphrase for GPG signing'
+            }
+            //Optional configuration for Maven Central sync of the version
+            mavenCentralSync {
+                sync = false //[Default: true] Determines whether to sync the version to Maven Central.
+                user = 'userToken' //OSS user token: mandatory
+                password = 'paasword' //OSS user password: mandatory
+                close = '1' //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+            }
+        }
+    }
+}
