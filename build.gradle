@@ -1,14 +1,15 @@
 plugins {
-    id "com.jfrog.bintray" version "1.7"
+    id "com.jfrog.bintray" version "1.7.3"
+    id "java"
+    id "maven"
+    id "maven-publish"
 }
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
 
 group = 'de.mfo.surfer'
-version = '2.0.0-SNAPSHOT'
+version = '0.17.0-SNAPSHOT'
 
 task wrapper(type: Wrapper) {
+    // always keep gradle version in Dockerfile in sync
     gradleVersion = '2.12'
 }
 
@@ -49,24 +50,30 @@ artifacts {
 
 publishing {
     publications {
-        MyPublication(MavenPublication) {
+        mavenPdf(MavenPublication) {
             from components.java
-            groupId 'de.mfo.surfer'
-            artifactId 'surfer-galleries'
+            groupId project.group
+            artifactId project.name
             version project.version
         }
+    }
+    repositories {
+            maven {
+                // define in local gradle.properties file
+                url (System.getenv('MAVEN_REPOSITORY_URL')!=null) ? System.getEnv('MAVEN_REPOSITORY_URL') : project.property( 'publishing.repositories.maven.url' )
+            }
     }
 }
 
 bintray {
-    user = project.hasProperty('bintray.user') ? project.property('bintray.user') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintray.apiKey') ? project.property('bintray.apiKey') : System.getenv('BINTRAY_API_KEY')
+    user = ( System.getenv('BINTRAY_USER') != null ) ? System.getenv('BINTRAY_USER') : ( project.hasProperty('bintray.user') ? project.property('bintray.user') : '' )
+    key = ( System.getenv('BINTRAY_API_KEY') != null ) ? System.getenv('BINTRAY_API_KEY') : ( project.hasProperty('bintray.apiKey') ? project.property('bintray.apiKey') : '' )
 
-    publications = ['MyPublication'] //When uploading Maven-based publication files
+    publications = ['mavenPdf'] //When uploading Maven-based publication files
 
-    dryRun = true //[Default: false] Whether to run this as dry-run, without deploying
+    dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
     publish = false //[Default: false] Whether version should be auto published after an upload
-    override = false //[Default: false] Whether to override version artifacts already published
+    override = true //[Default: false] Whether to override version artifacts already published
     //Package configuration. The plugin will use the repo and name properties to check if the package already exists. In that case, there's no need to configure the other package properties (like userOrg, desc, etc).
     pkg {
         repo = 'de.mfo.surfer'
@@ -93,12 +100,12 @@ bintray {
 //            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin'] //Optional version-level attributes
             //Optional configuration for GPG signing
             gpg {
-                sign = true //Determines whether to GPG sign the files. The default is false
+                sign = false //Determines whether to GPG sign the files. The default is false
                 passphrase = 'passphrase' //Optional. The passphrase for GPG signing'
             }
             //Optional configuration for Maven Central sync of the version
             mavenCentralSync {
-                sync = true //[Default: true] Determines whether to sync the version to Maven Central.
+                sync = false //[Default: true] Determines whether to sync the version to Maven Central.
                 user = 'userToken' //OSS user token: mandatory
                 password = 'paasword' //OSS user password: mandatory
                 close = '1' //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
