@@ -5,11 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 
 ## [0.18.0] - 2017-10-06
-- Merge all translations into a single LaTeX file
-- Add basic Gradle build to simplify building and deployment
-- Add Dockerfile to ease recreation of build environment
+### Added
+- add basic Gradle build to simplify building and deployment
+- add Dockerfile to ease recreation of build environment
+
+### Changed
+- merge all translations into a single LaTeX file
 
 ## [0.17.0] - 2017-10-06
+### Added
 - Italian translation
 
 ## [0.16.0] - 2017-09-28
@@ -25,7 +29,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.14.0] - 2015-07-21
 ### Changed
-- merged all document classes into a single one
+- merge all document classes into a single one
 
 ## [0.13.0] - 2015-07-21
 ### Changed
@@ -55,7 +59,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.8.0] - 2015-03-20
 ### Added
 - French translation
-- Instructions for compiling and contributing
+- instructions for compiling and contributing
 
 ## [0.7.0] - 2014-08-01
 ### Added
