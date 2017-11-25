@@ -60,7 +60,7 @@ publishing {
     repositories {
             maven {
                 // define in local gradle.properties file
-                url (System.getenv('MAVEN_REPOSITORY_URL')!=null) ? System.getEnv('MAVEN_REPOSITORY_URL') : project.property( 'publishing.repositories.maven.url' )
+                url ((System.getenv('MAVEN_REPOSITORY_URL')!=null) ? System.getenv('MAVEN_REPOSITORY_URL') : project.property( 'publishing.repositories.maven.url' ))
             }
     }
 }
