@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{SurferDesc}[2017/11/25 Class for Surfer description files]
-\def\SurferDesc@version{0.18.0-SNAPSHOT}
+\def\SurferDesc@version{0.18.0}
 
 % base this documentclass on AMS article
 \LoadClass[8pt]{amsart}
