@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{SurferDesc}[2017/09/28 Class for Surfer description files]
-\def\SurferDesc@version{0.16.0}
+\ProvidesClass{SurferDesc}[2017/10/06 Class for Surfer description files]
+\def\SurferDesc@version{0.17.0}
 
 \RequirePackage{xkeyval}
 
