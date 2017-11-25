@@ -1,3 +1,18 @@
+################
+# Gradle files #
+################
+.gradle
+gradle.properties
+
+#################
+# build results #
+#################
+build
+bin
+
+#######################
+# LaTeX related files #
+#######################
 *.aux
 *.log
 *.out
@@ -11,3 +26,14 @@
 *.synctex
 
 *.pdf
+
+######################
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

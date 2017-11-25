@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+- Merge all translations into a single LaTeX file
+- Add basic Gradle build to simplify building and deployment
+- Add Dockerfile to ease recreation of build environment
 
 ## [0.17.0] - 2017-10-06
 - Italian translation
