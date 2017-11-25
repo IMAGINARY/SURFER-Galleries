@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{SurferDesc}[2015/12/11 Class for Surfer description files]
-\def\SurferDesc@version{0.15.0}
+\ProvidesClass{SurferDesc}[2017/11/25 Class for Surfer description files]
+\def\SurferDesc@version{0.18.0-SNAPSHOT}
 
 % base this documentclass on AMS article
 \LoadClass[8pt]{amsart}
@@ -84,6 +84,11 @@
 \RequirePackage{hyperref}
 \RequirePackage[open]{bookmark}
 \RequirePackage{csquotes}
+\DeclareQuoteStyle{romanian}% verified
+  {\quotedblbase}
+  {\textquotedblright}
+  {\guillemotleft}
+  {\guillemotright}
 
 \hypersetup{pdfcreator={LaTeX2e with package SurferDesc (version \SurferDesc@version)}}
 
@@ -92,7 +97,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setmainlanguage{english}
-\setotherlanguages{arabic,dutch,english,french,german,hebrew,norwegian,portuges,russian,serbian,spanish,turkish}
+\setotherlanguages{arabic,dutch,english,french,german,hebrew,italian,norwegian,portuges,romanian,russian,serbian,spanish,turkish}
 
 \RequirePackage{ifthen}
 
@@ -105,7 +110,7 @@
         \selectlanguage{english}%
         \makexeCJKactive
     }{%
-        // workaround for polyglossia bug with 'german' language
+        % workaround for polyglossia bug with 'german' language
         \ifthenelse{\equal{#1}{german}}{\selectlanguage{ngerman}}{\selectlanguage{#1}}%
     }%
     \bookmark[level=0,page=\thepage]{#2}%
@@ -147,9 +152,9 @@
 
 % writing direction aware flush environment
 \newenvironment{SurferDescFlush}{%
-    \iflanguage{arabic}{\begin{flushright}}{\iflanguage{hebrew}{\begin{flushright}}{\begin{flushleft}}}%
+    \ifthenelse{\equal{\@SurferDesc@language}{arabic}}{\begin{flushright}}{\ifthenelse{\equal{\@SurferDesc@language}{hebrew}}{\begin{flushright}}{\begin{flushleft}}}%
 }{%
-    \iflanguage{arabic}{\end{flushright}}{\iflanguage{hebrew}{\end{flushright}}{\end{flushleft}}}%
+    \ifthenelse{\equal{\@SurferDesc@language}{arabic}}{\end{flushright}}{\ifthenelse{\equal{\@SurferDesc@language}{hebrew}}{\end{flushright}}{\end{flushleft}}}%
 }
 
 % introduction page for a gallery; arguments:
