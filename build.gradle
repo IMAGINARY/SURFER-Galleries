@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'de.mfo.surfer'
-version = '0.18.1-SNAPSHOT'
+version = '0.18.0'
 
 task wrapper(type: Wrapper) {
     // always keep gradle version in Dockerfile in sync
@@ -19,6 +19,7 @@ task pdf(type: Exec) {
         include 'SurferDesc.cls'
         include '**/*.tex'
         include 'images/**/*'
+        include 'AUTHORS'
     }
     outputs.file new File( buildDir, 'resources/main/de/mfo/surfer/gallery/Surfer-Galleries.pdf' )
     workingDir '.'
@@ -36,6 +37,12 @@ task pdf(type: Exec) {
         copy {
             from("${getTemporaryDir()}") {
                 include 'Surfer-Galleries.pdf'
+            }
+            into "${buildDir}/resources/main/de/mfo/surfer/gallery"
+        }
+        copy {
+            from(projectDir) {
+                include 'AUTHORS'
             }
             into "${buildDir}/resources/main/de/mfo/surfer/gallery"
         }
