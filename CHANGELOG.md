@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [0.18.1] - 2017-12-06
+### Added
+- AUTHORS file into the .jar
+
 ## [0.18.0] - 2017-10-06
 ### Added
 - add basic Gradle build to simplify building and deployment
@@ -94,7 +98,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - German, English and Russian translations
 
-[unreleased]: https://github.com/IMAGINARY/SURFER-Galleries/compare/v0.18.0...HEAD
+[unreleased]: https://github.com/IMAGINARY/SURFER-Galleries/compare/v0.18.1...HEAD
+[0.18.1]: https://github.com/IMAGINARY/SURFER-Galleries/compare/v0.18.0...v0.18.1
 [0.18.0]: https://github.com/IMAGINARY/SURFER-Galleries/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/IMAGINARY/SURFER-Galleries/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/IMAGINARY/SURFER-Galleries/compare/v0.15.0...v0.16.0
