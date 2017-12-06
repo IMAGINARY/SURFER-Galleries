@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'de.mfo.surfer'
-version = '0.18.0'
+version = '0.18.1-SNAPSHOT'
 
 task wrapper(type: Wrapper) {
     // always keep gradle version in Dockerfile in sync
